@@ -26,7 +26,7 @@ public final class ChatParticipant {
 
     /*
      * Time from which the chat history is shared with the member. The
-     * timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.
+     * timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.
      */
     @JsonProperty(value = "shareHistoryTime")
     private OffsetDateTime shareHistoryTime;
@@ -73,7 +73,11 @@ public final class ChatParticipant {
 
     /**
      * Get the shareHistoryTime property: Time from which the chat history is shared with the chat participant.
+<<<<<<< HEAD:sdk/communication/azure-communication-chat/src/main/java/com/azure/communication/chat/models/ChatParticipant.java
      * The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.
+=======
+     * The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441:sdk/communication/azure-communication-chat/src/main/java/com/azure/communication/chat/models/ChatThreadMember.java
      *
      * @return the shareHistoryTime value.
      */
@@ -83,7 +87,11 @@ public final class ChatParticipant {
 
     /**
      * Set the shareHistoryTime property: Time from which the chat history is shared with the chat participant.
+<<<<<<< HEAD:sdk/communication/azure-communication-chat/src/main/java/com/azure/communication/chat/models/ChatParticipant.java
      * The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.
+=======
+     * The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441:sdk/communication/azure-communication-chat/src/main/java/com/azure/communication/chat/models/ChatThreadMember.java
      *
      * @param shareHistoryTime the shareHistoryTime value to set.
      * @return the ChatThreadMember object itself.

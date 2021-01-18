@@ -37,7 +37,11 @@ output-folder: ..\
 license-header: MICROSOFT_MIT_SMALL
 namespace: com.azure.communication.chat
 generate-client-as-impl: true
+<<<<<<< HEAD
 custom-types: ChatMessagePriority,ChatThreadInfo,PostReadReceiptOptions,SendChatMessageOptions,UpdateChatMessageOptions,UpdateChatThreadOptions,Error,ErrorException,CreateChatThreadErrors
+=======
+custom-types: ChatMessagePriority,ChatThreadInfo,PostReadReceiptOptions,SendChatMessageOptions,UpdateChatMessageOptions,UpdateChatThreadOptions,Error,ErrorException,CreateChatThreadErrors,AddChatParticipantsErrors,AddChatParticipantsResult,ChatMessageContent,ChatMessageType
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
 custom-types-subpackage: models
 models-subpackage: implementation.models
 generate-client-interfaces: false
@@ -60,7 +64,11 @@ directive:
       delete $.AddChatParticipantsRequest;
     }
 - from: swagger-document
+<<<<<<< HEAD
   where: $["paths"]["/chat/threads/{chatThreadId}/participants"].post.parameters[2]
+=======
+  where: $["paths"]["/chat/threads/{chatThreadId}/participants/:add"].post.parameters[2]
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
   transform: >
     if ($.schema && $.schema.$ref && $.schema.$ref.endsWith("AddChatParticipantsRequest")) {
         const path = $.schema.$ref.replace(/[#].*$/, "#/definitions/AddChatParticipantsOptions");

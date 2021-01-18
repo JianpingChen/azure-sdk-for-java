@@ -64,6 +64,7 @@ public final class ChatAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<CreateChatThreadResult> createChatThread(CreateChatThreadOptions options) {
         try {
+            Objects.requireNonNull(options, "'options' cannot be null.");
             return withContext(context -> createChatThread(options, context)
                 .flatMap(
                     (Response<CreateChatThreadResult> res) -> {
@@ -87,6 +88,7 @@ public final class ChatAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<CreateChatThreadResult>> createChatThreadWithResponse(CreateChatThreadOptions options) {
         try {
+            Objects.requireNonNull(options, "'options' cannot be null.");
             return withContext(context -> createChatThread(options, context));
         } catch (RuntimeException ex) {
             return monoError(logger, ex);
@@ -102,9 +104,12 @@ public final class ChatAsyncClient {
      */
     Mono<Response<CreateChatThreadResult>> createChatThread(CreateChatThreadOptions options, Context context) {
         context = context == null ? Context.NONE : context;
+<<<<<<< HEAD
 
         Objects.requireNonNull(options, "'options' cannot be null.");
 
+=======
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
         return this.chatClient.createChatThreadWithResponseAsync(
             CreateChatThreadOptionsConverter.convert(options), options.getRepeatabilityRequestId(), context).map(
                 result -> new SimpleResponse<CreateChatThreadResult>(
@@ -120,6 +125,7 @@ public final class ChatAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ChatThread> getChatThread(String chatThreadId) {
         try {
+            Objects.requireNonNull(chatThreadId, "'chatThreadId' cannot be null.");
             return withContext(context -> getChatThread(chatThreadId, context)
                 .flatMap(
                     (Response<ChatThread> res) -> {
@@ -143,6 +149,7 @@ public final class ChatAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ChatThread>> getChatThreadWithResponse(String chatThreadId) {
         try {
+            Objects.requireNonNull(chatThreadId, "'chatThreadId' cannot be null.");
             return withContext(context -> getChatThread(chatThreadId, context));
         } catch (RuntimeException ex) {
             return monoError(logger, ex);
@@ -158,9 +165,12 @@ public final class ChatAsyncClient {
      */
     Mono<Response<ChatThread>> getChatThread(String chatThreadId, Context context) {
         context = context == null ? Context.NONE : context;
+<<<<<<< HEAD
 
         Objects.requireNonNull(chatThreadId, "'chatThreadId' cannot be null.");
 
+=======
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
         return this.chatClient.getChatThreadWithResponseAsync(chatThreadId, context)
             .flatMap(
                 (Response<com.azure.communication.chat.implementation.models.ChatThread> res) -> {
@@ -177,7 +187,6 @@ public final class ChatAsyncClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<ChatThreadInfo> listChatThreads() {
         ListChatThreadsOptions listThreadsOptions = new ListChatThreadsOptions();
-
         try {
             return new PagedFlux<>(
                 () -> withContext(context ->  this.chatClient.listChatThreadsSinglePageAsync(
@@ -199,7 +208,6 @@ public final class ChatAsyncClient {
     public PagedFlux<ChatThreadInfo> listChatThreads(ListChatThreadsOptions listThreadsOptions) {
         final ListChatThreadsOptions serviceListThreadsOptions
             = listThreadsOptions == null ? new ListChatThreadsOptions() : listThreadsOptions;
-
         try {
             return new PagedFlux<>(
                 () -> withContext(context ->  this.chatClient.listChatThreadsSinglePageAsync(
@@ -235,6 +243,7 @@ public final class ChatAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> deleteChatThread(String chatThreadId) {
         try {
+            Objects.requireNonNull(chatThreadId, "'chatThreadId' cannot be null.");
             return withContext(context -> deleteChatThread(chatThreadId, context))
                 .flatMap((Response<Void> res) -> {
                     return Mono.empty();
@@ -253,6 +262,7 @@ public final class ChatAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteChatThreadWithResponse(String chatThreadId) {
         try {
+            Objects.requireNonNull(chatThreadId, "'chatThreadId' cannot be null.");
             return withContext(context -> deleteChatThread(chatThreadId, context));
         } catch (RuntimeException ex) {
             return monoError(logger, ex);
@@ -268,9 +278,12 @@ public final class ChatAsyncClient {
      */
     Mono<Response<Void>> deleteChatThread(String chatThreadId, Context context) {
         context = context == null ? Context.NONE : context;
+<<<<<<< HEAD
 
         Objects.requireNonNull(chatThreadId, "'chatThreadId' cannot be null.");
 
+=======
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
         return this.chatClient.deleteChatThreadWithResponseAsync(chatThreadId, context);
     }
 

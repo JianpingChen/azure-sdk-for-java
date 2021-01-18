@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class CreateChatThreadResult {
     /*
+<<<<<<< HEAD
      * The thread property.
      */
     @JsonProperty(value = "thread")
@@ -19,11 +20,21 @@ public final class CreateChatThreadResult {
 
     /*
      * The errors property.
+=======
+     * Chat thread.
+     */
+    @JsonProperty(value = "chatThread")
+    private ChatThread chatThread;
+
+    /*
+     * Errors encountered during the creation of the chat thread.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      */
     @JsonProperty(value = "errors")
     private CreateChatThreadErrors errors;
 
     /**
+<<<<<<< HEAD
      * Get the thread property: The thread property.
      *
      * @return the thread value.
@@ -40,11 +51,33 @@ public final class CreateChatThreadResult {
      */
     public CreateChatThreadResult setThread(ChatThread thread) {
         this.thread = thread;
+=======
+     * Get the chatThread property: Chat thread.
+     *
+     * @return the chatThread value.
+     */
+    public ChatThread getChatThread() {
+        return this.chatThread;
+    }
+
+    /**
+     * Set the chatThread property: Chat thread.
+     *
+     * @param chatThread the chatThread value to set.
+     * @return the CreateChatThreadResult object itself.
+     */
+    public CreateChatThreadResult setChatThread(ChatThread chatThread) {
+        this.chatThread = chatThread;
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
         return this;
     }
 
     /**
+<<<<<<< HEAD
      * Get the errors property: The errors property.
+=======
+     * Get the errors property: Errors encountered during the creation of the chat thread.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      *
      * @return the errors value.
      */
@@ -53,7 +86,11 @@ public final class CreateChatThreadResult {
     }
 
     /**
+<<<<<<< HEAD
      * Set the errors property: The errors property.
+=======
+     * Set the errors property: Errors encountered during the creation of the chat thread.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      *
      * @param errors the errors value to set.
      * @return the CreateChatThreadResult object itself.

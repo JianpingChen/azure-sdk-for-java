@@ -25,9 +25,13 @@ public final class ChatParticipant {
 
     /*
      * Time from which the chat history is shared with the participant. The
+<<<<<<< HEAD:sdk/communication/azure-communication-chat/src/main/java/com/azure/communication/chat/implementation/models/ChatParticipant.java
      * timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.
+=======
+     * timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441:sdk/communication/azure-communication-chat/src/main/java/com/azure/communication/chat/implementation/models/ChatThreadMember.java
      */
-    @JsonProperty(value = "shareHistoryTime")
+    @JsonProperty(value = "shareHistoryTime", required = true)
     private OffsetDateTime shareHistoryTime;
 
     /**
@@ -72,7 +76,11 @@ public final class ChatParticipant {
 
     /**
      * Get the shareHistoryTime property: Time from which the chat history is shared with the participant. The timestamp
+<<<<<<< HEAD:sdk/communication/azure-communication-chat/src/main/java/com/azure/communication/chat/implementation/models/ChatParticipant.java
      * is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.
+=======
+     * is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441:sdk/communication/azure-communication-chat/src/main/java/com/azure/communication/chat/implementation/models/ChatThreadMember.java
      *
      * @return the shareHistoryTime value.
      */
@@ -82,7 +90,11 @@ public final class ChatParticipant {
 
     /**
      * Set the shareHistoryTime property: Time from which the chat history is shared with the participant. The timestamp
+<<<<<<< HEAD:sdk/communication/azure-communication-chat/src/main/java/com/azure/communication/chat/implementation/models/ChatParticipant.java
      * is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.
+=======
+     * is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441:sdk/communication/azure-communication-chat/src/main/java/com/azure/communication/chat/implementation/models/ChatThreadMember.java
      *
      * @param shareHistoryTime the shareHistoryTime value to set.
      * @return the ChatParticipant object itself.

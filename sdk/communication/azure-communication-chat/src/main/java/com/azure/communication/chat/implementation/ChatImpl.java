@@ -119,11 +119,21 @@ public final class ChatImpl {
      * @param createChatThreadRequest Request payload for creating a chat thread.
      * @param repeatabilityRequestID  If specified, the client directs that the request is repeatable; that is, that the
      *                                client can make the request multiple times with the same Repeatability-Request-ID
+<<<<<<< HEAD
      *                                and get back an appropriate response without the server executing the request
      *                                multiple times. The value of the Repeatability-Request-ID
      *                                is an opaque string representing a client-generated, globally unique for all time,
      *                                identifier for the request. It is recommended to use version 4 (random) UUIDs.
      * @return the response.
+=======
+     *                                and get back an appropriate
+     *                                response without the server executing the request multiple times. The value of the
+     *                                Repeatability-Request-ID
+     *                                is an opaque string representing a client-generated, globally unique for all time,
+     *                                identifier for the
+     *                                request. It is recommended to use version 4 (random) UUIDs.
+     * @return result of the create chat thread operation.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException           thrown if the request is rejected by server.
      * @throws RuntimeException         all other wrapped checked exceptions if the request fails to be sent.
@@ -147,12 +157,23 @@ public final class ChatImpl {
      * @param createChatThreadRequest Request payload for creating a chat thread.
      * @param repeatabilityRequestID  If specified, the client directs that the request is repeatable; that is, that the
      *                                client can make the request multiple times with the same Repeatability-Request-ID
+<<<<<<< HEAD
      *                                and get back an appropriate response without the server executing the request
      *                                multiple times. The value of the Repeatability-Request-ID
      *                                is an opaque string representing a client-generated, globally unique for all time,
      *                                identifier for the request. It is recommended to use version 4 (random) UUIDs.
      * @param context                 The context to associate with this operation.
      * @return the response.
+=======
+     *                                and get back an appropriate
+     *                                response without the server executing the request multiple times. The value of the
+     *                                Repeatability-Request-ID
+     *                                is an opaque string representing a client-generated, globally unique for all time,
+     *                                identifier for the
+     *                                request. It is recommended to use version 4 (random) UUIDs.
+     * @param context                 The context to associate with this operation.
+     * @return result of the create chat thread operation.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException           thrown if the request is rejected by server.
      * @throws RuntimeException         all other wrapped checked exceptions if the request fails to be sent.
@@ -174,11 +195,21 @@ public final class ChatImpl {
      * @param createChatThreadRequest Request payload for creating a chat thread.
      * @param repeatabilityRequestID  If specified, the client directs that the request is repeatable; that is, that the
      *                                client can make the request multiple times with the same Repeatability-Request-ID
+<<<<<<< HEAD
      *                                and get back an appropriate response without the server executing the request
      *                                multiple times. The value of the Repeatability-Request-ID
      *                                is an opaque string representing a client-generated, globally unique for all time,
      *                                identifier for the request. It is recommended to use version 4 (random) UUIDs.
      * @return the response.
+=======
+     *                                and get back an appropriate
+     *                                response without the server executing the request multiple times. The value of the
+     *                                Repeatability-Request-ID
+     *                                is an opaque string representing a client-generated, globally unique for all time,
+     *                                identifier for the
+     *                                request. It is recommended to use version 4 (random) UUIDs.
+     * @return result of the create chat thread operation.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException           thrown if the request is rejected by server.
      * @throws RuntimeException         all other wrapped checked exceptions if the request fails to be sent.
@@ -203,12 +234,23 @@ public final class ChatImpl {
      * @param createChatThreadRequest Request payload for creating a chat thread.
      * @param repeatabilityRequestID  If specified, the client directs that the request is repeatable; that is, that the
      *                                client can make the request multiple times with the same Repeatability-Request-ID
+<<<<<<< HEAD
      *                                and get back an appropriate response without the server executing the request
      *                                multiple times. The value of the Repeatability-Request-ID
      *                                is an opaque string representing a client-generated, globally unique for all time,
      *                                identifier for the request. It is recommended to use version 4 (random) UUIDs.
      * @param context                 The context to associate with this operation.
      * @return the response.
+=======
+     *                                and get back an appropriate
+     *                                response without the server executing the request multiple times. The value of the
+     *                                Repeatability-Request-ID
+     *                                is an opaque string representing a client-generated, globally unique for all time,
+     *                                identifier for the
+     *                                request. It is recommended to use version 4 (random) UUIDs.
+     * @param context                 The context to associate with this operation.
+     * @return result of the create chat thread operation.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException           thrown if the request is rejected by server.
      * @throws RuntimeException         all other wrapped checked exceptions if the request fails to be sent.
@@ -231,7 +273,11 @@ public final class ChatImpl {
      * Creates a chat thread.
      *
      * @param createChatThreadRequest Request payload for creating a chat thread.
+<<<<<<< HEAD
      * @return the response.
+=======
+     * @return result of the create chat thread operation.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException           thrown if the request is rejected by server.
      * @throws RuntimeException         all other wrapped checked exceptions if the request fails to be sent.
@@ -257,11 +303,21 @@ public final class ChatImpl {
      * @param createChatThreadRequest Request payload for creating a chat thread.
      * @param repeatabilityRequestID  If specified, the client directs that the request is repeatable; that is, that the
      *                                client can make the request multiple times with the same Repeatability-Request-ID
+<<<<<<< HEAD
      *                                and get back an appropriate response without the server executing the request
      *                                multiple times. The value of the Repeatability-Request-ID
      *                                is an opaque string representing a client-generated, globally unique for all time,
      *                                identifier for the request. It is recommended to use version 4 (random) UUIDs.
      * @return the response.
+=======
+     *                                and get back an appropriate
+     *                                response without the server executing the request multiple times. The value of the
+     *                                Repeatability-Request-ID
+     *                                is an opaque string representing a client-generated, globally unique for all time,
+     *                                identifier for the
+     *                                request. It is recommended to use version 4 (random) UUIDs.
+     * @return result of the create chat thread operation.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException           thrown if the request is rejected by server.
      * @throws RuntimeException         all other wrapped checked exceptions if the request fails to be sent.
@@ -278,12 +334,23 @@ public final class ChatImpl {
      * @param createChatThreadRequest Request payload for creating a chat thread.
      * @param repeatabilityRequestID  If specified, the client directs that the request is repeatable; that is, that the
      *                                client can make the request multiple times with the same Repeatability-Request-ID
+<<<<<<< HEAD
      *                                and get back an appropriate response without the server executing the request
      *                                multiple times. The value of the Repeatability-Request-ID
      *                                is an opaque string representing a client-generated, globally unique for all time,
      *                                identifier for the request. It is recommended to use version 4 (random) UUIDs.
      * @param context                 The context to associate with this operation.
      * @return the response.
+=======
+     *                                and get back an appropriate
+     *                                response without the server executing the request multiple times. The value of the
+     *                                Repeatability-Request-ID
+     *                                is an opaque string representing a client-generated, globally unique for all time,
+     *                                identifier for the
+     *                                request. It is recommended to use version 4 (random) UUIDs.
+     * @param context                 The context to associate with this operation.
+     * @return result of the create chat thread operation.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException           thrown if the request is rejected by server.
      * @throws RuntimeException         all other wrapped checked exceptions if the request fails to be sent.
@@ -298,7 +365,11 @@ public final class ChatImpl {
      * Creates a chat thread.
      *
      * @param createChatThreadRequest Request payload for creating a chat thread.
+<<<<<<< HEAD
      * @return the response.
+=======
+     * @return result of the create chat thread operation.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException           thrown if the request is rejected by server.
      * @throws RuntimeException         all other wrapped checked exceptions if the request fails to be sent.
@@ -315,7 +386,11 @@ public final class ChatImpl {
      *
      * @param maxPageSize The maximum number of chat threads returned per page.
      * @param startTime   The earliest point in time to get chat threads up to.
+<<<<<<< HEAD
      *                    The timestamp should be in ISO8601 format:
+=======
+     *                    The timestamp should be in RFC3339 format:
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      *                    `yyyy-MM-ddTHH:mm:ssZ`.
      * @return the list of chat threads of a user.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -349,7 +424,11 @@ public final class ChatImpl {
      *
      * @param maxPageSize The maximum number of chat threads returned per page.
      * @param startTime   The earliest point in time to get chat threads up to.
+<<<<<<< HEAD
      *                    The timestamp should be in ISO8601 format:
+=======
+     *                    The timestamp should be in RFC3339 format:
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      *                    `yyyy-MM-ddTHH:mm:ssZ`.
      * @param context     The context to associate with this operation.
      * @return the list of chat threads of a user.
@@ -378,7 +457,11 @@ public final class ChatImpl {
      *
      * @param maxPageSize The maximum number of chat threads returned per page.
      * @param startTime   The earliest point in time to get chat threads up to.
+<<<<<<< HEAD
      *                    The timestamp should be in ISO8601 format:
+=======
+     *                    The timestamp should be in RFC3339 format:
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      *                    `yyyy-MM-ddTHH:mm:ssZ`.
      * @return the list of chat threads of a user.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -397,7 +480,11 @@ public final class ChatImpl {
      *
      * @param maxPageSize The maximum number of chat threads returned per page.
      * @param startTime   The earliest point in time to get chat threads up to.
+<<<<<<< HEAD
      *                    The timestamp should be in ISO8601 format:
+=======
+     *                    The timestamp should be in RFC3339 format:
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      *                    `yyyy-MM-ddTHH:mm:ssZ`.
      * @param context     The context to associate with this operation.
      * @return the list of chat threads of a user.
@@ -435,7 +522,11 @@ public final class ChatImpl {
      *
      * @param maxPageSize The maximum number of chat threads returned per page.
      * @param startTime   The earliest point in time to get chat threads up to.
+<<<<<<< HEAD
      *                    The timestamp should be in ISO8601 format:
+=======
+     *                    The timestamp should be in RFC3339 format:
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      *                    `yyyy-MM-ddTHH:mm:ssZ`.
      * @return the list of chat threads of a user.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -452,7 +543,11 @@ public final class ChatImpl {
      *
      * @param maxPageSize The maximum number of chat threads returned per page.
      * @param startTime   The earliest point in time to get chat threads up to.
+<<<<<<< HEAD
      *                    The timestamp should be in ISO8601 format:
+=======
+     *                    The timestamp should be in RFC3339 format:
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      *                    `yyyy-MM-ddTHH:mm:ssZ`.
      * @param context     The context to associate with this operation.
      * @return the list of chat threads of a user.
@@ -484,7 +579,11 @@ public final class ChatImpl {
     /**
      * Gets a chat thread.
      *
+<<<<<<< HEAD
      * @param chatThreadId Thread id to get.
+=======
+     * @param chatThreadId Id of the thread.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @return a chat thread.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException           thrown if the request is rejected by server.
@@ -501,7 +600,11 @@ public final class ChatImpl {
     /**
      * Gets a chat thread.
      *
+<<<<<<< HEAD
      * @param chatThreadId Thread id to get.
+=======
+     * @param chatThreadId Id of the thread.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @param context      The context to associate with this operation.
      * @return a chat thread.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -516,7 +619,11 @@ public final class ChatImpl {
     /**
      * Gets a chat thread.
      *
+<<<<<<< HEAD
      * @param chatThreadId Thread id to get.
+=======
+     * @param chatThreadId Id of the thread.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @return a chat thread.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException           thrown if the request is rejected by server.
@@ -538,7 +645,11 @@ public final class ChatImpl {
     /**
      * Gets a chat thread.
      *
+<<<<<<< HEAD
      * @param chatThreadId Thread id to get.
+=======
+     * @param chatThreadId Id of the thread.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @param context      The context to associate with this operation.
      * @return a chat thread.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -561,7 +672,11 @@ public final class ChatImpl {
     /**
      * Gets a chat thread.
      *
+<<<<<<< HEAD
      * @param chatThreadId Thread id to get.
+=======
+     * @param chatThreadId Id of the thread.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @return a chat thread.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException           thrown if the request is rejected by server.
@@ -575,7 +690,11 @@ public final class ChatImpl {
     /**
      * Gets a chat thread.
      *
+<<<<<<< HEAD
      * @param chatThreadId Thread id to get.
+=======
+     * @param chatThreadId Id of the thread.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @param context      The context to associate with this operation.
      * @return a chat thread.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -590,7 +709,11 @@ public final class ChatImpl {
     /**
      * Deletes a thread.
      *
+<<<<<<< HEAD
      * @param chatThreadId Thread id to delete.
+=======
+     * @param chatThreadId Id of the thread to be deleted.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @return the completion.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException           thrown if the request is rejected by server.
@@ -607,7 +730,11 @@ public final class ChatImpl {
     /**
      * Deletes a thread.
      *
+<<<<<<< HEAD
      * @param chatThreadId Thread id to delete.
+=======
+     * @param chatThreadId Id of the thread to be deleted.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @param context      The context to associate with this operation.
      * @return the completion.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -622,7 +749,11 @@ public final class ChatImpl {
     /**
      * Deletes a thread.
      *
+<<<<<<< HEAD
      * @param chatThreadId Thread id to delete.
+=======
+     * @param chatThreadId Id of the thread to be deleted.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @return the completion.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException           thrown if the request is rejected by server.
@@ -636,7 +767,11 @@ public final class ChatImpl {
     /**
      * Deletes a thread.
      *
+<<<<<<< HEAD
      * @param chatThreadId Thread id to delete.
+=======
+     * @param chatThreadId Id of the thread to be deleted.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @param context      The context to associate with this operation.
      * @return the completion.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -651,7 +786,11 @@ public final class ChatImpl {
     /**
      * Deletes a thread.
      *
+<<<<<<< HEAD
      * @param chatThreadId Thread id to delete.
+=======
+     * @param chatThreadId Id of the thread to be deleted.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException           thrown if the request is rejected by server.
      * @throws RuntimeException         all other wrapped checked exceptions if the request fails to be sent.
@@ -664,7 +803,11 @@ public final class ChatImpl {
     /**
      * Deletes a thread.
      *
+<<<<<<< HEAD
      * @param chatThreadId Thread id to delete.
+=======
+     * @param chatThreadId Id of the thread to be deleted.
+>>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @param context      The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException           thrown if the request is rejected by server.
