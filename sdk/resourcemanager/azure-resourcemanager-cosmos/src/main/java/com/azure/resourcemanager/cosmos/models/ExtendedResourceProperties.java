@@ -28,7 +28,7 @@ public class ExtendedResourceProperties {
      * the resource.
      */
     @JsonProperty(value = "_ts", access = JsonProperty.Access.WRITE_ONLY)
-    private Float ts;
+    private Object ts;
 
     /*
      * A system generated property representing the resource etag required for
@@ -51,7 +51,7 @@ public class ExtendedResourceProperties {
      *
      * @return the ts value.
      */
-    public Float ts() {
+    public Object ts() {
         return this.ts;
     }
 

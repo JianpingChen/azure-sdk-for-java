@@ -100,7 +100,6 @@
 
 # Management Plane
 /sdk/resourcemanager/                               @ChenTanyi @weidongxu-microsoft @yungezz @xccc-msft
-/sdk/**/azure-resourcemanager-*                     @ChenTanyi @weidongxu-microsoft @yungezz @xccc-msft
 /sdk/**/mgmt*/                                      @ChenTanyi @weidongxu-microsoft @yungezz @xccc-msft
 
 ###########

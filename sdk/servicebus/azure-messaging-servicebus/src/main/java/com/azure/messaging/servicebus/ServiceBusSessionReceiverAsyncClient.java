@@ -3,8 +3,6 @@
 
 package com.azure.messaging.servicebus;
 
-import com.azure.core.amqp.AmqpRetryOptions;
-import com.azure.core.amqp.exception.AmqpException;
 import com.azure.core.amqp.implementation.MessageSerializer;
 import com.azure.core.amqp.implementation.TracerProvider;
 import com.azure.core.annotation.ReturnType;
@@ -25,14 +23,14 @@ import static com.azure.core.util.FluxUtil.monoError;
  * This session receiver client is used to acquire session locks from a queue or topic and create
  * {@link ServiceBusReceiverAsyncClient} instances that are tied to the locked sessions.
  *
- * <p><strong>Receive messages from a specific session</strong></p>
- * <p>Use {@link #acceptSession(String)} to acquire the lock of a session if you know the session id.</p>
- * {@codesnippet com.azure.messaging.servicebus.servicebusreceiverasyncclient.instantiation#sessionId}
+ * Use {@link #acceptSession(String)} to acquire the lock of a session if you know the session id.
  *
- * <p><strong>Receive messages from the first available session</strong></p>
- * <p>Use {@link #acceptNextSession()} to acquire the lock of the next available session without specifying the session
- * id.</p>
- * {@codesnippet com.azure.messaging.servicebus.servicebusreceiverasyncclient.instantiation#nextsession}
+ * {@codesnippet com.azure.messaging.servicebus.servicebusasyncreceiverclient.instantiation#nextsession}
+ *
+ * Use {@link #acceptNextSession()} to acquire the lock of the next available session without specifying the session id.
+ *
+ * {@codesnippet com.azure.messaging.servicebus.servicebusasyncreceiverclient.instantiation#sessionId}
+ *
  */
 @ServiceClient(builder = ServiceBusClientBuilder.class, isAsync = true)
 public final class ServiceBusSessionReceiverAsyncClient implements AutoCloseable {
@@ -65,15 +63,14 @@ public final class ServiceBusSessionReceiverAsyncClient implements AutoCloseable
     }
 
     /**
-     * Acquires a session lock for the next available session and creates a {@link ServiceBusReceiverAsyncClient}
-     * to receive messages from the session. It will wait until a session is available if none is immediately
-     * available.
+     * Acquires a session lock for the next available session and create a {@link ServiceBusReceiverAsyncClient}
+     * to receive messages from the session. It will wait until a session is available if no one is available
+     * immediately.
+     *
+     * {@codesnippet com.azure.messaging.servicebus.servicebusasyncreceiverclient.instantiation#nextsession}
      *
      * @return A {@link ServiceBusReceiverAsyncClient} that is tied to the available session.
-     *
      * @throws UnsupportedOperationException if the queue or topic subscription is not session-enabled.
-     * @throws AmqpException if the operation times out. The timeout duration is the tryTimeout
-     *      of when you build this client with the {@link ServiceBusClientBuilder#retryOptions(AmqpRetryOptions)}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ServiceBusReceiverAsyncClient> acceptNextSession() {
@@ -94,16 +91,16 @@ public final class ServiceBusSessionReceiverAsyncClient implements AutoCloseable
     /**
      * Acquires a session lock for {@code sessionId} and create a {@link ServiceBusReceiverAsyncClient}
      * to receive messages from the session. If the session is already locked by another client, an
-     * {@link AmqpException} is thrown.
+     * {@link com.azure.core.amqp.exception.AmqpException} is thrown.
      *
-     * @param sessionId The session id.
+     * {@codesnippet com.azure.messaging.servicebus.servicebusasyncreceiverclient.instantiation#sessionId}
      *
+     * @param sessionId The session Id.
      * @return A {@link ServiceBusReceiverAsyncClient} that is tied to the specified session.
-     *
      * @throws NullPointerException if {@code sessionId} is null.
      * @throws IllegalArgumentException if {@code sessionId} is empty.
      * @throws UnsupportedOperationException if the queue or topic subscription is not session-enabled.
-     * @throws AmqpException if the lock cannot be acquired.
+     * @throws com.azure.core.amqp.exception.AmqpException if the lock cannot be acquired.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ServiceBusReceiverAsyncClient> acceptSession(String sessionId) {
@@ -113,17 +110,16 @@ public final class ServiceBusSessionReceiverAsyncClient implements AutoCloseable
         if (CoreUtils.isNullOrEmpty(sessionId)) {
             return monoError(logger, new IllegalArgumentException("'sessionId' cannot be empty"));
         }
-
         final ReceiverOptions newReceiverOptions = new ReceiverOptions(receiverOptions.getReceiveMode(),
             receiverOptions.getPrefetchCount(), receiverOptions.getMaxLockRenewDuration(),
             receiverOptions.isEnableAutoComplete(), sessionId, null);
-        final ServiceBusSessionManager sessionSpecificManager = new ServiceBusSessionManager(entityPath, entityType,
-            connectionProcessor, tracerProvider, messageSerializer, newReceiverOptions);
 
-        return sessionSpecificManager.getActiveLink().map(receiveLink -> new ServiceBusReceiverAsyncClient(
+        ServiceBusReceiverAsyncClient sessionSpecificAsyncClient = new ServiceBusReceiverAsyncClient(
             fullyQualifiedNamespace, entityPath, entityType, newReceiverOptions, connectionProcessor,
-            ServiceBusConstants.OPERATION_TIMEOUT, tracerProvider, messageSerializer, () -> { },
-            sessionSpecificManager));
+            ServiceBusConstants.OPERATION_TIMEOUT, tracerProvider, messageSerializer, () -> { });
+
+        return sessionSpecificAsyncClient.createConsumerWithReceiveLink()
+            .thenReturn(sessionSpecificAsyncClient);
     }
 
     @Override

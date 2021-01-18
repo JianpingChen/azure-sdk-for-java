@@ -5,6 +5,7 @@
 package com.azure.storage.file.share.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.storage.file.share.models.ShareItem;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -44,10 +45,10 @@ public final class ListSharesResponse {
 
     private static final class SharesWrapper {
         @JacksonXmlProperty(localName = "Share")
-        private final List<ShareItemInternal> items;
+        private final List<ShareItem> items;
 
         @JsonCreator
-        private SharesWrapper(@JacksonXmlProperty(localName = "Share") List<ShareItemInternal> items) {
+        private SharesWrapper(@JacksonXmlProperty(localName = "Share") List<ShareItem> items) {
             this.items = items;
         }
     }
@@ -149,9 +150,9 @@ public final class ListSharesResponse {
      *
      * @return the shareItems value.
      */
-    public List<ShareItemInternal> getShareItems() {
+    public List<ShareItem> getShareItems() {
         if (this.shareItems == null) {
-            this.shareItems = new SharesWrapper(new ArrayList<ShareItemInternal>());
+            this.shareItems = new SharesWrapper(new ArrayList<ShareItem>());
         }
         return this.shareItems.items;
     }
@@ -162,7 +163,7 @@ public final class ListSharesResponse {
      * @param shareItems the shareItems value to set.
      * @return the ListSharesResponse object itself.
      */
-    public ListSharesResponse setShareItems(List<ShareItemInternal> shareItems) {
+    public ListSharesResponse setShareItems(List<ShareItem> shareItems) {
         this.shareItems = new SharesWrapper(shareItems);
         return this;
     }

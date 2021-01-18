@@ -25,7 +25,7 @@ public final class SqlUserDefinedFunctionGetPropertiesResource extends SqlUserDe
      * the resource.
      */
     @JsonProperty(value = "_ts", access = JsonProperty.Access.WRITE_ONLY)
-    private Float ts;
+    private Object ts;
 
     /*
      * A system generated property representing the resource etag required for
@@ -48,7 +48,7 @@ public final class SqlUserDefinedFunctionGetPropertiesResource extends SqlUserDe
      *
      * @return the ts value.
      */
-    public Float ts() {
+    public Object ts() {
         return this.ts;
     }
 
@@ -60,20 +60,6 @@ public final class SqlUserDefinedFunctionGetPropertiesResource extends SqlUserDe
      */
     public String etag() {
         return this.etag;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public SqlUserDefinedFunctionGetPropertiesResource withId(String id) {
-        super.withId(id);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public SqlUserDefinedFunctionGetPropertiesResource withBody(String body) {
-        super.withBody(body);
-        return this;
     }
 
     /**

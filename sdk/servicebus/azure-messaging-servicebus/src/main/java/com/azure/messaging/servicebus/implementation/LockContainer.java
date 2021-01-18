@@ -130,8 +130,4 @@ public class LockContainer<T> implements AutoCloseable {
             remove(key);
         }
     }
-
-    public boolean isClosed() {
-        return isDisposed.get();
-    }
 }

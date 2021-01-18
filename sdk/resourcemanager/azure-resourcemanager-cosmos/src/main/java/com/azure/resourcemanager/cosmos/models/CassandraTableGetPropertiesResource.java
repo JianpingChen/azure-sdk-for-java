@@ -25,7 +25,7 @@ public final class CassandraTableGetPropertiesResource extends CassandraTableRes
      * the resource.
      */
     @JsonProperty(value = "_ts", access = JsonProperty.Access.WRITE_ONLY)
-    private Float ts;
+    private Object ts;
 
     /*
      * A system generated property representing the resource etag required for
@@ -48,7 +48,7 @@ public final class CassandraTableGetPropertiesResource extends CassandraTableRes
      *
      * @return the ts value.
      */
-    public Float ts() {
+    public Object ts() {
         return this.ts;
     }
 
@@ -60,34 +60,6 @@ public final class CassandraTableGetPropertiesResource extends CassandraTableRes
      */
     public String etag() {
         return this.etag;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public CassandraTableGetPropertiesResource withId(String id) {
-        super.withId(id);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public CassandraTableGetPropertiesResource withDefaultTtl(Integer defaultTtl) {
-        super.withDefaultTtl(defaultTtl);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public CassandraTableGetPropertiesResource withSchema(CassandraSchema schema) {
-        super.withSchema(schema);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public CassandraTableGetPropertiesResource withAnalyticalStorageTtl(Integer analyticalStorageTtl) {
-        super.withAnalyticalStorageTtl(analyticalStorageTtl);
-        return this;
     }
 
     /**

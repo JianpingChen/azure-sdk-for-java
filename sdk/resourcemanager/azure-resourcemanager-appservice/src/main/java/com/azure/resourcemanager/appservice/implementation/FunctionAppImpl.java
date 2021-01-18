@@ -272,9 +272,7 @@ class FunctionAppImpl
         if (description.tier().equalsIgnoreCase(SkuName.BASIC.toString())
             || description.tier().equalsIgnoreCase(SkuName.STANDARD.toString())
             || description.tier().equalsIgnoreCase(SkuName.PREMIUM.toString())
-            || description.tier().equalsIgnoreCase(SkuName.PREMIUM_V2.toString())
-            || description.tier().equalsIgnoreCase(PricingTier.PREMIUM_P1V3.toSkuDescription().tier()) // PremiumV3
-        ) {
+            || description.tier().equalsIgnoreCase(SkuName.PREMIUM_V2.toString())) {
             return withWebAppAlwaysOn(true);
         } else {
             return withWebAppAlwaysOn(false);

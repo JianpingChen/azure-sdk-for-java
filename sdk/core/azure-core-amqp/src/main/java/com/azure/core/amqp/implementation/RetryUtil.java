@@ -12,7 +12,6 @@ import com.azure.core.util.logging.ClientLogger;
 import reactor.core.Exceptions;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.util.retry.Retry;
 
 import java.time.Duration;
 import java.util.Locale;
@@ -56,7 +55,7 @@ public class RetryUtil {
      */
     public static <T> Flux<T> withRetry(Flux<T> source, Duration operationTimeout, AmqpRetryPolicy retryPolicy) {
         return Flux.defer(() -> source.timeout(operationTimeout))
-            .retryWhen(Retry.withThrowable(errors -> retry(errors, retryPolicy)));
+            .retryWhen(errors -> retry(errors, retryPolicy));
     }
 
     /**
@@ -68,7 +67,7 @@ public class RetryUtil {
      */
     public static <T> Mono<T> withRetry(Mono<T> source, Duration operationTimeout, AmqpRetryPolicy retryPolicy) {
         return Mono.defer(() -> source.timeout(operationTimeout))
-            .retryWhen(Retry.withThrowable(errors -> retry(errors, retryPolicy)));
+            .retryWhen(errors -> retry(errors, retryPolicy));
     }
 
     private static Flux<Long> retry(Flux<Throwable> source, AmqpRetryPolicy retryPolicy) {

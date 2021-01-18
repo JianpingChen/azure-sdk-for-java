@@ -5,17 +5,17 @@
 package com.azure.communication.chat.implementation.models;
 
 import com.azure.communication.chat.models.ChatThreadInfo;
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The ChatThreadsInfoCollection model. */
-@Fluent
+@Immutable
 public final class ChatThreadsInfoCollection {
     /*
      * Collection of chat threads.
      */
-    @JsonProperty(value = "value", required = true)
+    @JsonProperty(value = "value", access = JsonProperty.Access.WRITE_ONLY)
     private List<ChatThreadInfo> value;
 
     /*
@@ -32,17 +32,6 @@ public final class ChatThreadsInfoCollection {
      */
     public List<ChatThreadInfo> getValue() {
         return this.value;
-    }
-
-    /**
-     * Set the value property: Collection of chat threads.
-     *
-     * @param value the value value to set.
-     * @return the ChatThreadsInfoCollection object itself.
-     */
-    public ChatThreadsInfoCollection setValue(List<ChatThreadInfo> value) {
-        this.value = value;
-        return this;
     }
 
     /**

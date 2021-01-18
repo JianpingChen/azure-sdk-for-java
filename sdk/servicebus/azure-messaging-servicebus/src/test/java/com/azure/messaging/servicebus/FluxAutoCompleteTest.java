@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -89,7 +88,6 @@ class FluxAutoCompleteTest {
         when(onAbandon.apply(any())).thenReturn(Mono.empty());
 
         // Act
-
         StepVerifier.create(autoComplete)
             .then(() -> testPublisher.emit(context, context2))
             .expectNext(context, context2)
@@ -110,18 +108,13 @@ class FluxAutoCompleteTest {
         final ServiceBusReceivedMessage message2 = mock(ServiceBusReceivedMessage.class);
         final ServiceBusMessageContext context2 = new ServiceBusMessageContext(message2);
         final FluxAutoComplete autoComplete = new FluxAutoComplete(testPublisher.flux(), completionLock, onComplete, onAbandon);
+
         when(onComplete.apply(any())).thenReturn(Mono.empty());
         when(onAbandon.apply(any())).thenReturn(Mono.empty());
 
         doAnswer(invocation -> {
             throw new IllegalArgumentException("Dummy message.");
         }).when(downstreamSubscriber).onNext(context2);
-
-        doAnswer(invocation -> {
-            Subscription subscription = invocation.getArgument(0);
-            subscription.request(10);
-            return null;
-        }).when(downstreamSubscriber).onSubscribe(any(Subscription.class));
 
         // Act
         autoComplete.subscribe(downstreamSubscriber);
@@ -149,12 +142,6 @@ class FluxAutoCompleteTest {
 
         when(onComplete.apply(any())).thenReturn(Mono.empty());
         when(onAbandon.apply(any())).thenReturn(Mono.empty());
-
-        doAnswer(invocation -> {
-            Subscription subscription = invocation.getArgument(0);
-            subscription.request(10);
-            return null;
-        }).when(downstreamSubscriber).onSubscribe(any(Subscription.class));
 
         // Act
         autoComplete.subscribe(downstreamSubscriber);

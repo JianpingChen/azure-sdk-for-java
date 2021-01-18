@@ -40,7 +40,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Tests {@link ReactorNettyHttpResponse}.
+ * Tests {@link NettyAsyncHttpClient.ReactorNettyHttpResponse}.
  */
 public class ReactorNettyHttpResponseTests {
     private static final HttpRequest REQUEST = new HttpRequest(HttpMethod.GET, "https://example.com");
@@ -52,7 +52,8 @@ public class ReactorNettyHttpResponseTests {
         HttpClientResponse reactorNettyResponse = mock(HttpClientResponse.class);
         when(reactorNettyResponse.status()).thenReturn(HttpResponseStatus.OK);
 
-        ReactorNettyHttpResponse response = new ReactorNettyHttpResponse(reactorNettyResponse, null, REQUEST, false);
+        NettyAsyncHttpClient.ReactorNettyHttpResponse response = new NettyAsyncHttpClient.ReactorNettyHttpResponse(
+            reactorNettyResponse, null, REQUEST, false);
 
         assertEquals(200, response.getStatusCode());
     }
@@ -66,7 +67,7 @@ public class ReactorNettyHttpResponseTests {
         HttpClientResponse reactorNettyResponse = mock(HttpClientResponse.class);
         when(reactorNettyResponse.responseHeaders()).thenReturn(headers);
 
-        com.azure.core.http.HttpHeaders actualHeaders = new ReactorNettyHttpResponse(
+        com.azure.core.http.HttpHeaders actualHeaders = new NettyAsyncHttpClient.ReactorNettyHttpResponse(
             reactorNettyResponse, null, REQUEST, false)
             .getHeaders();
 
@@ -86,7 +87,8 @@ public class ReactorNettyHttpResponseTests {
         when(connection.inbound()).thenReturn(nettyInbound);
         when(connection.isDisposed()).thenReturn(true);
 
-        ReactorNettyHttpResponse response = new ReactorNettyHttpResponse(null, connection, REQUEST, false);
+        NettyAsyncHttpClient.ReactorNettyHttpResponse response = new NettyAsyncHttpClient.ReactorNettyHttpResponse(
+            null, connection, REQUEST, false);
 
         StepVerifier.create(FluxUtil.collectBytesInByteBufferStream(response.getBody()))
             .assertNext(actual -> assertArrayEquals(HELLO_BYTES, actual))
@@ -105,7 +107,8 @@ public class ReactorNettyHttpResponseTests {
         when(connection.inbound()).thenReturn(nettyInbound);
         when(connection.isDisposed()).thenReturn(true);
 
-        ReactorNettyHttpResponse response = new ReactorNettyHttpResponse(null, connection, REQUEST, false);
+        NettyAsyncHttpClient.ReactorNettyHttpResponse response = new NettyAsyncHttpClient.ReactorNettyHttpResponse(
+            null, connection, REQUEST, false);
 
         StepVerifier.create(response.getBodyAsByteArray())
             .assertNext(actual -> assertArrayEquals(HELLO_BYTES, actual))
@@ -130,8 +133,8 @@ public class ReactorNettyHttpResponseTests {
         when(connection.inbound()).thenReturn(nettyInbound);
         when(connection.isDisposed()).thenReturn(true);
 
-        ReactorNettyHttpResponse response = new ReactorNettyHttpResponse(reactorNettyResponse, connection, REQUEST,
-            false);
+        NettyAsyncHttpClient.ReactorNettyHttpResponse response = new NettyAsyncHttpClient.ReactorNettyHttpResponse(
+            reactorNettyResponse, connection, REQUEST, false);
 
         StepVerifier.create(response.getBodyAsString())
             .assertNext(actual -> assertEquals(HELLO, actual))
@@ -150,7 +153,8 @@ public class ReactorNettyHttpResponseTests {
         when(connection.inbound()).thenReturn(nettyInbound);
         when(connection.isDisposed()).thenReturn(true);
 
-        ReactorNettyHttpResponse response = new ReactorNettyHttpResponse(null, connection, REQUEST, false);
+        NettyAsyncHttpClient.ReactorNettyHttpResponse response = new NettyAsyncHttpClient.ReactorNettyHttpResponse(
+            null, connection, REQUEST, false);
 
         StepVerifier.create(response.getBodyAsString(StandardCharsets.UTF_8))
             .assertNext(actual -> assertEquals(HELLO, actual))
@@ -162,7 +166,7 @@ public class ReactorNettyHttpResponseTests {
         Connection connection = mock(Connection.class);
         when(connection.isDisposed()).thenReturn(true);
 
-        new ReactorNettyHttpResponse(null, connection, REQUEST, false).close();
+        new NettyAsyncHttpClient.ReactorNettyHttpResponse(null, connection, REQUEST, false).close();
 
         verify(connection, times(1)).isDisposed();
     }
@@ -171,7 +175,7 @@ public class ReactorNettyHttpResponseTests {
     @MethodSource("verifyDisposalSupplier")
     public void verifyDisposal(String methodName, Class<?>[] argumentTypes, Object[] argumentValues)
         throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method method = ReactorNettyHttpResponse.class.getMethod(methodName, argumentTypes);
+        Method method = NettyAsyncHttpClient.ReactorNettyHttpResponse.class.getMethod(methodName, argumentTypes);
         ByteBufFlux byteBufFlux = ByteBufFlux.fromString(Mono.just("hello"), StandardCharsets.UTF_8,
             ByteBufAllocator.DEFAULT);
         HttpHeaders headers = new DefaultHttpHeaders()
@@ -195,8 +199,8 @@ public class ReactorNettyHttpResponseTests {
         when(connection.isDisposed()).thenReturn(false);
         when(connection.channel()).thenReturn(channel);
 
-        ReactorNettyHttpResponse response = new ReactorNettyHttpResponse(reactorNettyResponse, connection, REQUEST,
-            false);
+        NettyAsyncHttpClient.ReactorNettyHttpResponse response =
+            new NettyAsyncHttpClient.ReactorNettyHttpResponse(reactorNettyResponse, connection, REQUEST, false);
 
         Object object = method.invoke(response, argumentValues);
         if (object instanceof Mono) {
@@ -214,7 +218,7 @@ public class ReactorNettyHttpResponseTests {
             Arguments.of("getBody", null, null),
             Arguments.of("getBodyAsByteArray", null, null),
             Arguments.of("getBodyAsString", null, null),
-            Arguments.of("getBodyAsString", new Class<?>[]{Charset.class}, new Object[]{StandardCharsets.UTF_8}),
+            Arguments.of("getBodyAsString", new Class<?>[] { Charset.class }, new Object[] { StandardCharsets.UTF_8 }),
             Arguments.of("close", null, null)
         );
     }

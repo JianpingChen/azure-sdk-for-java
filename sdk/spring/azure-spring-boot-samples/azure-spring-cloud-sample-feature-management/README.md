@@ -5,8 +5,10 @@ This sample describes how to use [spring-cloud-feature-management](https://githu
 ## Key concepts
 ## Getting started
 
-### Environment checklist
-We need to ensure that this [environment checklist][ready-to-run-checklist] is completed before the run.
+### Prerequisite
+
+* A [Java Development Kit (JDK)][jdk_link], version 8.
+* [Apache Maven](https://maven.apache.org/), version 3.0 or later.
 
 ### How to run without Azure Configuration Service
 Start the application and check the resulting console output to check the returned value.
@@ -31,6 +33,8 @@ $ mvn spring-boot:run
 Change the connection-string value with the Access Key value of the Configuration Store created above.
 
 #### Run the application
+First, we need to ensure that this [instruction] is completed before run.
+
 Start the application and access http://localhost:8080 to check the returned value. Different commands for different scenarios are listed below.
 
 1. Load properties similar with from application.properties, i.e., keys starting with /application/
@@ -64,4 +68,4 @@ Please refer to this [README](https://github.com/Azure/azure-sdk-for-java/blob/m
 
 <!-- LINKS -->
 [jdk_link]: https://docs.microsoft.com/java/azure/jdk/?view=azure-java-stable
-[ready-to-run-checklist]: https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/spring/azure-spring-boot-samples/README.md#ready-to-run-checklist
+[instruction]: https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/spring/CONTRIBUTING.md#building-from-source

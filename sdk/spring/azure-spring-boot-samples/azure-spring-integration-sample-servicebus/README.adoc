@@ -1,4 +1,4 @@
-:ready-to-run-checklist: https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/spring/azure-spring-boot-samples/README.md#ready-to-run-checklist
+:instruction: https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/spring/CONTRIBUTING.md#building-from-source
 
 = Spring Cloud Azure Service Bus Integration Code Sample shared library for Java
 
@@ -9,9 +9,6 @@ This code sample demonstrates how to use Spring Integration for Azure Service Bu
 
 Running this sample will be charged by Azure.
 You can check the usage and bill at https://azure.microsoft.com/en-us/account/[this link].
-
-=== Environment checklist
-We need to ensure that this {ready-to-run-checklist}[environment checklist] is completed before the run.
 
 === Connection string based usage
 
@@ -64,40 +61,42 @@ spring.cloud.azure.servicebus.namespace=[servicebus-namespace]
 ....
 
 === How to run
-1. Update queue name in link:src/main/java/com/example/QueueReceiveController.java#L29[QueueReceiveController] and
+First, we need to ensure that this {instruction}[instruction] is completed before run.
+
+5. Update queue name in link:src/main/java/com/example/QueueReceiveController.java#L29[QueueReceiveController] and
 link:src/main/java/com/example/QueueSendController.java#L32[QueueSendController], and update topic name and subscription in
 link:src/main/java/com/example/TopicReceiveController.java#L29[TopicReceiveController] and
 link:src/main/java/com/example/TopicSendController.java#L31[TopicSendController].
 
-2. Run the `mvn clean spring-boot:run` in the root of the code sample to get the app running.
+6. Run the `mvn clean spring-boot:run` in the root of the code sample to get the app running.
 
-3. Send a POST request to service bus queue
+7. Send a POST request to service bus queue
 +
 ....
 $ curl -X POST localhost:8080/queues?message=hello
 ....
 
-4. Verify in your app's logs that a similar message was posted:
+8. Verify in your app's logs that a similar message was posted:
 +
 ....
 New message received: 'hello'
 Message 'hello' successfully checkpointed
 ....
 
-5. Send a POST request to service bus topic
+9. Send a POST request to service bus topic
 +
 ....
 $ curl -X POST localhost:8080/topics?message=hello
 ....
 
-6. Verify in your app's logs that a similar message was posted:
+10. Verify in your app's logs that a similar message was posted:
 +
 ....
 New message received: 'hello'
 Message 'hello' successfully checkpointed
 ....
 
-7. Delete the resources on http://ms.portal.azure.com/[Azure Portal] to avoid unexpected charges.
+11. Delete the resources on http://ms.portal.azure.com/[Azure Portal] to avoid unexpected charges.
 
 == Examples
 == Troubleshooting

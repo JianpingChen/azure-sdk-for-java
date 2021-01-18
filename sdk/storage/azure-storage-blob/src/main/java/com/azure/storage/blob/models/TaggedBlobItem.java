@@ -4,9 +4,6 @@
 
 package com.azure.storage.blob.models;
 
-import java.util.Collections;
-import java.util.Map;
-
 /**
  * Blob info from a Filter Blobs API call.
  */
@@ -18,19 +15,8 @@ public final class TaggedBlobItem {
      * @param name The blob name
      */
     public TaggedBlobItem(String containerName, String name) {
-        this(containerName, name, Collections.emptyMap());
-    }
-
-    /**
-     * Constructor to create a new TaggedBlobItem
-     * @param containerName The container name
-     * @param name The blob name
-     * @param tags The blob tags
-     */
-    public TaggedBlobItem(String containerName, String name, Map<String, String> tags) {
         this.name = name;
         this.containerName = containerName;
-        this.tags = tags;
     }
 
     /*
@@ -42,8 +28,6 @@ public final class TaggedBlobItem {
      * The containerName property.
      */
     private final String containerName;
-
-    private final Map<String, String> tags;
 
     /**
      * Get the name property: The name property.
@@ -61,14 +45,5 @@ public final class TaggedBlobItem {
      */
     public String getContainerName() {
         return this.containerName;
-    }
-
-    /**
-     * Get the tags property: The tags property.
-     *
-     * @return the tags value.
-     */
-    public Map<String, String> getTags() {
-        return this.tags;
     }
 }

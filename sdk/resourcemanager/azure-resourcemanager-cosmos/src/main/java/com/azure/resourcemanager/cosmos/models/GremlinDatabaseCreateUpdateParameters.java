@@ -27,8 +27,8 @@ public class GremlinDatabaseCreateUpdateParameters extends ArmResourceProperties
      * A key-value pair of options to be applied for the request. This
      * corresponds to the headers sent with the request.
      */
-    @JsonProperty(value = "properties.options")
-    private CreateUpdateOptions options;
+    @JsonProperty(value = "properties.options", required = true)
+    private Map<String, String> options;
 
     /**
      * Get the resource property: The standard JSON format of a Gremlin database.
@@ -56,7 +56,7 @@ public class GremlinDatabaseCreateUpdateParameters extends ArmResourceProperties
      *
      * @return the options value.
      */
-    public CreateUpdateOptions options() {
+    public Map<String, String> options() {
         return this.options;
     }
 
@@ -67,22 +67,8 @@ public class GremlinDatabaseCreateUpdateParameters extends ArmResourceProperties
      * @param options the options value to set.
      * @return the GremlinDatabaseCreateUpdateParameters object itself.
      */
-    public GremlinDatabaseCreateUpdateParameters withOptions(CreateUpdateOptions options) {
+    public GremlinDatabaseCreateUpdateParameters withOptions(Map<String, String> options) {
         this.options = options;
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public GremlinDatabaseCreateUpdateParameters withLocation(String location) {
-        super.withLocation(location);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public GremlinDatabaseCreateUpdateParameters withTags(Map<String, String> tags) {
-        super.withTags(tags);
         return this;
     }
 
@@ -102,8 +88,11 @@ public class GremlinDatabaseCreateUpdateParameters extends ArmResourceProperties
         } else {
             resource().validate();
         }
-        if (options() != null) {
-            options().validate();
+        if (options() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException(
+                        "Missing required property options in model GremlinDatabaseCreateUpdateParameters"));
         }
     }
 }

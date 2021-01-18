@@ -5,7 +5,6 @@ package com.azure.cosmos.implementation;
 import com.azure.cosmos.implementation.directconnectivity.AddressSelector;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.util.retry.Retry;
 
 import java.time.Duration;
 import java.util.concurrent.Callable;
@@ -38,7 +37,7 @@ public class BackoffRetryUtility {
             } catch (Exception e) {
                 return Mono.error(e);
             }
-        }).retryWhen(Retry.withThrowable(RetryUtils.toRetryWhenFunc(retryPolicy)));
+        }).retryWhen(RetryUtils.toRetryWhenFunc(retryPolicy));
     }
 
     static public <T> Flux<T> fluxExecuteRetry(Callable<Flux<T>> callbackMethod, IRetryPolicy retryPolicy) {
@@ -49,7 +48,7 @@ public class BackoffRetryUtility {
             } catch (Exception e) {
                 return Flux.error(e);
             }
-        }).retryWhen(Retry.withThrowable(RetryUtils.toRetryWhenFunc(retryPolicy)));
+        }).retryWhen(RetryUtils.toRetryWhenFunc(retryPolicy));
     }
 
     static public <T> Mono<T> executeAsync(

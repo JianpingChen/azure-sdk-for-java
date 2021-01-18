@@ -20,7 +20,7 @@ import static com.azure.messaging.servicebus.implementation.ServiceBusConstants.
  * @see ServiceBusAdministrationClient#createTopic(String, CreateTopicOptions)
  */
 @Fluent
-public final class CreateSubscriptionOptions {
+public class CreateSubscriptionOptions {
     private Duration autoDeleteOnIdle;
     private Duration defaultMessageTimeToLive;
     private boolean deadLetteringOnMessageExpiration;

@@ -32,12 +32,6 @@ public class CassandraTableResource {
     @JsonProperty(value = "schema")
     private CassandraSchema schema;
 
-    /*
-     * Analytical TTL.
-     */
-    @JsonProperty(value = "analyticalStorageTtl")
-    private Integer analyticalStorageTtl;
-
     /**
      * Get the id property: Name of the Cosmos DB Cassandra table.
      *
@@ -95,26 +89,6 @@ public class CassandraTableResource {
      */
     public CassandraTableResource withSchema(CassandraSchema schema) {
         this.schema = schema;
-        return this;
-    }
-
-    /**
-     * Get the analyticalStorageTtl property: Analytical TTL.
-     *
-     * @return the analyticalStorageTtl value.
-     */
-    public Integer analyticalStorageTtl() {
-        return this.analyticalStorageTtl;
-    }
-
-    /**
-     * Set the analyticalStorageTtl property: Analytical TTL.
-     *
-     * @param analyticalStorageTtl the analyticalStorageTtl value to set.
-     * @return the CassandraTableResource object itself.
-     */
-    public CassandraTableResource withAnalyticalStorageTtl(Integer analyticalStorageTtl) {
-        this.analyticalStorageTtl = analyticalStorageTtl;
         return this;
     }
 

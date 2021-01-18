@@ -685,8 +685,7 @@ class FileAPITest extends APISpec {
         fc.getProperties()
 
         then:
-        def ex = thrown(DataLakeStorageException)
-        ex.getMessage().contains("BlobNotFound")
+        thrown(DataLakeStorageException)
     }
 
     def "Set HTTP headers null"() {

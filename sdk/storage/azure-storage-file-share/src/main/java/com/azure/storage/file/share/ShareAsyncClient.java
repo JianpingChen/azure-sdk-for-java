@@ -303,12 +303,9 @@ public class ShareAsyncClient {
     Mono<Response<ShareInfo>> createWithResponse(ShareCreateOptions options, Context context) {
         context = context == null ? Context.NONE : context;
         options = options == null ? new ShareCreateOptions() : options;
-        String enabledProtocol = options.getProtocols() == null ? null : options.getProtocols().toString();
-        enabledProtocol = "".equals(enabledProtocol) ? null : enabledProtocol;
         return azureFileStorageClient.shares()
             .createWithRestResponseAsync(shareName, null, options.getMetadata(), options.getQuotaInGb(),
-                options.getAccessTier(), enabledProtocol, options.getRootSquash(),
-                context.addData(AZ_TRACING_NAMESPACE_KEY, STORAGE_TRACING_NAMESPACE_VALUE))
+                options.getAccessTier(), context.addData(AZ_TRACING_NAMESPACE_KEY, STORAGE_TRACING_NAMESPACE_VALUE))
             .map(this::mapToShareInfoResponse);
     }
 
@@ -640,7 +637,7 @@ public class ShareAsyncClient {
             ? new ShareRequestConditions() : options.getRequestConditions();
         context = context == null ? Context.NONE : context;
         return azureFileStorageClient.shares().setPropertiesWithRestResponseAsync(shareName, null,
-            options.getQuotaInGb(), options.getAccessTier(), requestConditions.getLeaseId(), options.getRootSquash(),
+            options.getQuotaInGb(), options.getAccessTier(), requestConditions.getLeaseId(),
             context.addData(AZ_TRACING_NAMESPACE_KEY, STORAGE_TRACING_NAMESPACE_VALUE))
             .map(this::mapToShareInfoResponse);
     }
@@ -1490,9 +1487,7 @@ public class ShareAsyncClient {
             .setLeaseStatus(headers.getLeaseStatus())
             .setAccessTier(headers.getAccessTier())
             .setAccessTierChangeTime(headers.getAccessTierChangeTime())
-            .setAccessTierTransitionState(headers.getAccessTierTransitionState())
-            .setProtocols(ModelHelper.parseShareProtocols(headers.getEnabledProtocols()))
-            .setRootSquash(headers.getRootSquash());
+            .setAccessTierTransitionState(headers.getAccessTierTransitionState());
 
         return new SimpleResponse<>(response, shareProperties);
     }

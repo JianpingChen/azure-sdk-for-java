@@ -4,9 +4,7 @@
 package com.azure.messaging.servicebus;
 
 /**
- * Context for errors handled by the {@link ServiceBusProcessorClient Service Bus processor}.
- *
- * @see ServiceBusProcessorClient
+ * Context for errors handled by the Service Bus processor.
  */
 public final class ServiceBusErrorContext {
     private final Throwable exception;

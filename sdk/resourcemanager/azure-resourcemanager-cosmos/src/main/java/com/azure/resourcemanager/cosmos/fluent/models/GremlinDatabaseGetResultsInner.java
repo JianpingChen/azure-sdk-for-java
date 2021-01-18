@@ -9,10 +9,8 @@ import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.resourcemanager.cosmos.models.ArmResourceProperties;
 import com.azure.resourcemanager.cosmos.models.GremlinDatabaseGetPropertiesResource;
-import com.azure.resourcemanager.cosmos.models.OptionsResource;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Map;
 
 /** An Azure Cosmos DB Gremlin database. */
 @JsonFlatten
@@ -25,12 +23,6 @@ public class GremlinDatabaseGetResultsInner extends ArmResourceProperties {
      */
     @JsonProperty(value = "properties.resource")
     private GremlinDatabaseGetPropertiesResource resource;
-
-    /*
-     * Cosmos DB options resource object
-     */
-    @JsonProperty(value = "properties.options", access = JsonProperty.Access.WRITE_ONLY)
-    private OptionsResource options;
 
     /**
      * Get the resource property: The resource property.
@@ -53,29 +45,6 @@ public class GremlinDatabaseGetResultsInner extends ArmResourceProperties {
     }
 
     /**
-     * Get the options property: Cosmos DB options resource object.
-     *
-     * @return the options value.
-     */
-    public OptionsResource options() {
-        return this.options;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public GremlinDatabaseGetResultsInner withLocation(String location) {
-        super.withLocation(location);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public GremlinDatabaseGetResultsInner withTags(Map<String, String> tags) {
-        super.withTags(tags);
-        return this;
-    }
-
-    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -85,9 +54,6 @@ public class GremlinDatabaseGetResultsInner extends ArmResourceProperties {
         super.validate();
         if (resource() != null) {
             resource().validate();
-        }
-        if (options() != null) {
-            options().validate();
         }
     }
 }

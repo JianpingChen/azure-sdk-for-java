@@ -27,8 +27,8 @@ public class MongoDBCollectionCreateUpdateParameters extends ArmResourceProperti
      * A key-value pair of options to be applied for the request. This
      * corresponds to the headers sent with the request.
      */
-    @JsonProperty(value = "properties.options")
-    private CreateUpdateOptions options;
+    @JsonProperty(value = "properties.options", required = true)
+    private Map<String, String> options;
 
     /**
      * Get the resource property: The standard JSON format of a MongoDB collection.
@@ -56,7 +56,7 @@ public class MongoDBCollectionCreateUpdateParameters extends ArmResourceProperti
      *
      * @return the options value.
      */
-    public CreateUpdateOptions options() {
+    public Map<String, String> options() {
         return this.options;
     }
 
@@ -67,22 +67,8 @@ public class MongoDBCollectionCreateUpdateParameters extends ArmResourceProperti
      * @param options the options value to set.
      * @return the MongoDBCollectionCreateUpdateParameters object itself.
      */
-    public MongoDBCollectionCreateUpdateParameters withOptions(CreateUpdateOptions options) {
+    public MongoDBCollectionCreateUpdateParameters withOptions(Map<String, String> options) {
         this.options = options;
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public MongoDBCollectionCreateUpdateParameters withLocation(String location) {
-        super.withLocation(location);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public MongoDBCollectionCreateUpdateParameters withTags(Map<String, String> tags) {
-        super.withTags(tags);
         return this;
     }
 
@@ -102,8 +88,11 @@ public class MongoDBCollectionCreateUpdateParameters extends ArmResourceProperti
         } else {
             resource().validate();
         }
-        if (options() != null) {
-            options().validate();
+        if (options() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException(
+                        "Missing required property options in model MongoDBCollectionCreateUpdateParameters"));
         }
     }
 }

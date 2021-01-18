@@ -10,7 +10,6 @@ import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
-import java.util.Map;
 
 /** Parameters to create and update Cosmos DB database accounts. */
 @JsonFlatten
@@ -45,10 +44,13 @@ public class DatabaseAccountCreateUpdateParameters extends ArmResourceProperties
     private String databaseAccountOfferType;
 
     /*
-     * List of IpRules.
+     * Cosmos DB Firewall Support: This value specifies the set of IP addresses
+     * or IP address ranges in CIDR form to be included as the allowed list of
+     * client IPs for a given database account. IP addresses/ranges must be
+     * comma separated and must not contain any spaces.
      */
-    @JsonProperty(value = "properties.ipRules")
-    private List<IpAddressOrRange> ipRules;
+    @JsonProperty(value = "properties.ipRangeFilter")
+    private String ipRangeFilter;
 
     /*
      * Flag to indicate whether to enable/disable Virtual Network ACL rules.
@@ -102,48 +104,6 @@ public class DatabaseAccountCreateUpdateParameters extends ArmResourceProperties
      */
     @JsonProperty(value = "properties.disableKeyBasedMetadataWriteAccess")
     private Boolean disableKeyBasedMetadataWriteAccess;
-
-    /*
-     * The URI of the key vault
-     */
-    @JsonProperty(value = "properties.keyVaultKeyUri")
-    private String keyVaultKeyUri;
-
-    /*
-     * Whether requests from Public Network are allowed
-     */
-    @JsonProperty(value = "properties.publicNetworkAccess", access = JsonProperty.Access.WRITE_ONLY)
-    private PublicNetworkAccess publicNetworkAccess;
-
-    /*
-     * Flag to indicate whether Free Tier is enabled.
-     */
-    @JsonProperty(value = "properties.enableFreeTier")
-    private Boolean enableFreeTier;
-
-    /*
-     * API specific properties. Currently, supported only for MongoDB API.
-     */
-    @JsonProperty(value = "properties.apiProperties")
-    private ApiProperties apiProperties;
-
-    /*
-     * Flag to indicate whether to enable storage analytics.
-     */
-    @JsonProperty(value = "properties.enableAnalyticalStorage")
-    private Boolean enableAnalyticalStorage;
-
-    /*
-     * The object representing the policy for taking backups on an account.
-     */
-    @JsonProperty(value = "properties.backupPolicy")
-    private BackupPolicy backupPolicy;
-
-    /*
-     * The CORS policy for the Cosmos DB database account.
-     */
-    @JsonProperty(value = "properties.cors")
-    private List<CorsPolicy> cors;
 
     /** Creates an instance of DatabaseAccountCreateUpdateParameters class. */
     public DatabaseAccountCreateUpdateParameters() {
@@ -233,22 +193,26 @@ public class DatabaseAccountCreateUpdateParameters extends ArmResourceProperties
     }
 
     /**
-     * Get the ipRules property: List of IpRules.
+     * Get the ipRangeFilter property: Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP
+     * address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP
+     * addresses/ranges must be comma separated and must not contain any spaces.
      *
-     * @return the ipRules value.
+     * @return the ipRangeFilter value.
      */
-    public List<IpAddressOrRange> ipRules() {
-        return this.ipRules;
+    public String ipRangeFilter() {
+        return this.ipRangeFilter;
     }
 
     /**
-     * Set the ipRules property: List of IpRules.
+     * Set the ipRangeFilter property: Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP
+     * address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP
+     * addresses/ranges must be comma separated and must not contain any spaces.
      *
-     * @param ipRules the ipRules value to set.
+     * @param ipRangeFilter the ipRangeFilter value to set.
      * @return the DatabaseAccountCreateUpdateParameters object itself.
      */
-    public DatabaseAccountCreateUpdateParameters withIpRules(List<IpAddressOrRange> ipRules) {
-        this.ipRules = ipRules;
+    public DatabaseAccountCreateUpdateParameters withIpRangeFilter(String ipRangeFilter) {
+        this.ipRangeFilter = ipRangeFilter;
         return this;
     }
 
@@ -424,149 +388,6 @@ public class DatabaseAccountCreateUpdateParameters extends ArmResourceProperties
     }
 
     /**
-     * Get the keyVaultKeyUri property: The URI of the key vault.
-     *
-     * @return the keyVaultKeyUri value.
-     */
-    public String keyVaultKeyUri() {
-        return this.keyVaultKeyUri;
-    }
-
-    /**
-     * Set the keyVaultKeyUri property: The URI of the key vault.
-     *
-     * @param keyVaultKeyUri the keyVaultKeyUri value to set.
-     * @return the DatabaseAccountCreateUpdateParameters object itself.
-     */
-    public DatabaseAccountCreateUpdateParameters withKeyVaultKeyUri(String keyVaultKeyUri) {
-        this.keyVaultKeyUri = keyVaultKeyUri;
-        return this;
-    }
-
-    /**
-     * Get the publicNetworkAccess property: Whether requests from Public Network are allowed.
-     *
-     * @return the publicNetworkAccess value.
-     */
-    public PublicNetworkAccess publicNetworkAccess() {
-        return this.publicNetworkAccess;
-    }
-
-    /**
-     * Get the enableFreeTier property: Flag to indicate whether Free Tier is enabled.
-     *
-     * @return the enableFreeTier value.
-     */
-    public Boolean enableFreeTier() {
-        return this.enableFreeTier;
-    }
-
-    /**
-     * Set the enableFreeTier property: Flag to indicate whether Free Tier is enabled.
-     *
-     * @param enableFreeTier the enableFreeTier value to set.
-     * @return the DatabaseAccountCreateUpdateParameters object itself.
-     */
-    public DatabaseAccountCreateUpdateParameters withEnableFreeTier(Boolean enableFreeTier) {
-        this.enableFreeTier = enableFreeTier;
-        return this;
-    }
-
-    /**
-     * Get the apiProperties property: API specific properties. Currently, supported only for MongoDB API.
-     *
-     * @return the apiProperties value.
-     */
-    public ApiProperties apiProperties() {
-        return this.apiProperties;
-    }
-
-    /**
-     * Set the apiProperties property: API specific properties. Currently, supported only for MongoDB API.
-     *
-     * @param apiProperties the apiProperties value to set.
-     * @return the DatabaseAccountCreateUpdateParameters object itself.
-     */
-    public DatabaseAccountCreateUpdateParameters withApiProperties(ApiProperties apiProperties) {
-        this.apiProperties = apiProperties;
-        return this;
-    }
-
-    /**
-     * Get the enableAnalyticalStorage property: Flag to indicate whether to enable storage analytics.
-     *
-     * @return the enableAnalyticalStorage value.
-     */
-    public Boolean enableAnalyticalStorage() {
-        return this.enableAnalyticalStorage;
-    }
-
-    /**
-     * Set the enableAnalyticalStorage property: Flag to indicate whether to enable storage analytics.
-     *
-     * @param enableAnalyticalStorage the enableAnalyticalStorage value to set.
-     * @return the DatabaseAccountCreateUpdateParameters object itself.
-     */
-    public DatabaseAccountCreateUpdateParameters withEnableAnalyticalStorage(Boolean enableAnalyticalStorage) {
-        this.enableAnalyticalStorage = enableAnalyticalStorage;
-        return this;
-    }
-
-    /**
-     * Get the backupPolicy property: The object representing the policy for taking backups on an account.
-     *
-     * @return the backupPolicy value.
-     */
-    public BackupPolicy backupPolicy() {
-        return this.backupPolicy;
-    }
-
-    /**
-     * Set the backupPolicy property: The object representing the policy for taking backups on an account.
-     *
-     * @param backupPolicy the backupPolicy value to set.
-     * @return the DatabaseAccountCreateUpdateParameters object itself.
-     */
-    public DatabaseAccountCreateUpdateParameters withBackupPolicy(BackupPolicy backupPolicy) {
-        this.backupPolicy = backupPolicy;
-        return this;
-    }
-
-    /**
-     * Get the cors property: The CORS policy for the Cosmos DB database account.
-     *
-     * @return the cors value.
-     */
-    public List<CorsPolicy> cors() {
-        return this.cors;
-    }
-
-    /**
-     * Set the cors property: The CORS policy for the Cosmos DB database account.
-     *
-     * @param cors the cors value to set.
-     * @return the DatabaseAccountCreateUpdateParameters object itself.
-     */
-    public DatabaseAccountCreateUpdateParameters withCors(List<CorsPolicy> cors) {
-        this.cors = cors;
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public DatabaseAccountCreateUpdateParameters withLocation(String location) {
-        super.withLocation(location);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public DatabaseAccountCreateUpdateParameters withTags(Map<String, String> tags) {
-        super.withTags(tags);
-        return this;
-    }
-
-    /**
      * Validates the instance.
      *
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -585,23 +406,11 @@ public class DatabaseAccountCreateUpdateParameters extends ArmResourceProperties
         } else {
             locations().forEach(e -> e.validate());
         }
-        if (ipRules() != null) {
-            ipRules().forEach(e -> e.validate());
-        }
         if (capabilities() != null) {
             capabilities().forEach(e -> e.validate());
         }
         if (virtualNetworkRules() != null) {
             virtualNetworkRules().forEach(e -> e.validate());
-        }
-        if (apiProperties() != null) {
-            apiProperties().validate();
-        }
-        if (backupPolicy() != null) {
-            backupPolicy().validate();
-        }
-        if (cors() != null) {
-            cors().forEach(e -> e.validate());
         }
     }
 }

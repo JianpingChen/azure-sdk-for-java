@@ -88,6 +88,7 @@ public class CosmosDBTests extends ResourceManagerTestBase {
                 .withEventualConsistency()
                 .withWriteReplication(Region.US_EAST)
                 .withReadReplication(Region.US_CENTRAL)
+                .withIpRangeFilter("")
                 .withMultipleWriteLocationsEnabled(true)
                 .withTag("tag1", "value1")
                 .create();
@@ -201,6 +202,7 @@ public class CosmosDBTests extends ResourceManagerTestBase {
                 .withEventualConsistency()
                 .withWriteReplication(Region.US_EAST)
                 .withReadReplication(Region.US_CENTRAL)
+                .withIpRangeFilter("")
                 .withTag("tag1", "value1")
                 .create();
 
@@ -225,6 +227,7 @@ public class CosmosDBTests extends ResourceManagerTestBase {
                 .withEventualConsistency()
                 .withWriteReplication(Region.US_EAST)
                 .withReadReplication(Region.US_WEST)
+                .withIpRangeFilter("")
                 .withTag("tag1", "value1")
                 .create();
 
@@ -276,6 +279,7 @@ public class CosmosDBTests extends ResourceManagerTestBase {
                 .withEventualConsistency()
                 .withWriteReplication(Region.US_EAST)
                 .withReadReplication(Region.US_EAST2)
+                .withIpRangeFilter("")
                 .withTag("tag1", "value1")
                 .create();
 

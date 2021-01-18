@@ -6,7 +6,6 @@ package com.azure.resourcemanager.cosmos.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Headers;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
@@ -63,7 +62,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
     @Host("{$host}")
     @ServiceInterface(name = "CosmosDBManagementCl")
     private interface DatabasesService {
-        @Headers({"Content-Type: application/json"})
+        @Headers({"Accept: application/json", "Content-Type: application/json"})
         @Get(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB"
                 + "/databaseAccounts/{accountName}/databases/{databaseRid}/metrics")
@@ -77,10 +76,9 @@ public final class DatabasesClientImpl implements DatabasesClient {
             @PathParam("databaseRid") String databaseRid,
             @QueryParam("api-version") String apiVersion,
             @QueryParam("$filter") String filter,
-            @HeaderParam("Accept") String accept,
             Context context);
 
-        @Headers({"Content-Type: application/json"})
+        @Headers({"Accept: application/json", "Content-Type: application/json"})
         @Get(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB"
                 + "/databaseAccounts/{accountName}/databases/{databaseRid}/usages")
@@ -94,10 +92,9 @@ public final class DatabasesClientImpl implements DatabasesClient {
             @PathParam("databaseRid") String databaseRid,
             @QueryParam("api-version") String apiVersion,
             @QueryParam("$filter") String filter,
-            @HeaderParam("Accept") String accept,
             Context context);
 
-        @Headers({"Content-Type: application/json"})
+        @Headers({"Accept: application/json", "Content-Type: application/json"})
         @Get(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB"
                 + "/databaseAccounts/{accountName}/databases/{databaseRid}/metricDefinitions")
@@ -110,14 +107,13 @@ public final class DatabasesClientImpl implements DatabasesClient {
             @PathParam("accountName") String accountName,
             @PathParam("databaseRid") String databaseRid,
             @QueryParam("api-version") String apiVersion,
-            @HeaderParam("Accept") String accept,
             Context context);
     }
 
     /**
      * Retrieves the metrics determined by the given filter for the given database account and database.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be
@@ -156,8 +152,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
         if (filter == null) {
             return Mono.error(new IllegalArgumentException("Parameter filter is required and cannot be null."));
         }
-        final String apiVersion = "2020-09-01";
-        final String accept = "application/json";
+        final String apiVersion = "2019-08-01";
         return FluxUtil
             .withContext(
                 context ->
@@ -170,7 +165,6 @@ public final class DatabasesClientImpl implements DatabasesClient {
                             databaseRid,
                             apiVersion,
                             filter,
-                            accept,
                             context))
             .<PagedResponse<MetricInner>>map(
                 res ->
@@ -182,7 +176,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
     /**
      * Retrieves the metrics determined by the given filter for the given database account and database.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be
@@ -222,8 +216,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
         if (filter == null) {
             return Mono.error(new IllegalArgumentException("Parameter filter is required and cannot be null."));
         }
-        final String apiVersion = "2020-09-01";
-        final String accept = "application/json";
+        final String apiVersion = "2019-08-01";
         context = this.client.mergeContext(context);
         return service
             .listMetrics(
@@ -234,7 +227,6 @@ public final class DatabasesClientImpl implements DatabasesClient {
                 databaseRid,
                 apiVersion,
                 filter,
-                accept,
                 context)
             .map(
                 res ->
@@ -245,7 +237,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
     /**
      * Retrieves the metrics determined by the given filter for the given database account and database.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be
@@ -265,7 +257,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
     /**
      * Retrieves the metrics determined by the given filter for the given database account and database.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be
@@ -287,7 +279,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
     /**
      * Retrieves the metrics determined by the given filter for the given database account and database.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be
@@ -307,7 +299,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
     /**
      * Retrieves the metrics determined by the given filter for the given database account and database.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be
@@ -328,7 +320,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
     /**
      * Retrieves the usages (most recent data) for the given database.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of usages to return. The supported parameter is
@@ -363,8 +355,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
         if (databaseRid == null) {
             return Mono.error(new IllegalArgumentException("Parameter databaseRid is required and cannot be null."));
         }
-        final String apiVersion = "2020-09-01";
-        final String accept = "application/json";
+        final String apiVersion = "2019-08-01";
         return FluxUtil
             .withContext(
                 context ->
@@ -377,7 +368,6 @@ public final class DatabasesClientImpl implements DatabasesClient {
                             databaseRid,
                             apiVersion,
                             filter,
-                            accept,
                             context))
             .<PagedResponse<UsageInner>>map(
                 res ->
@@ -389,7 +379,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
     /**
      * Retrieves the usages (most recent data) for the given database.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of usages to return. The supported parameter is
@@ -425,8 +415,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
         if (databaseRid == null) {
             return Mono.error(new IllegalArgumentException("Parameter databaseRid is required and cannot be null."));
         }
-        final String apiVersion = "2020-09-01";
-        final String accept = "application/json";
+        final String apiVersion = "2019-08-01";
         context = this.client.mergeContext(context);
         return service
             .listUsages(
@@ -437,7 +426,6 @@ public final class DatabasesClientImpl implements DatabasesClient {
                 databaseRid,
                 apiVersion,
                 filter,
-                accept,
                 context)
             .map(
                 res ->
@@ -448,7 +436,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
     /**
      * Retrieves the usages (most recent data) for the given database.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of usages to return. The supported parameter is
@@ -467,7 +455,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
     /**
      * Retrieves the usages (most recent data) for the given database.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -484,7 +472,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
     /**
      * Retrieves the usages (most recent data) for the given database.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of usages to return. The supported parameter is
@@ -505,24 +493,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
     /**
      * Retrieves the usages (most recent data) for the given database.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param accountName Cosmos DB database account name.
-     * @param databaseRid Cosmos DB database rid.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response to a list usage request.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<UsageInner> listUsages(String resourceGroupName, String accountName, String databaseRid) {
-        final String filter = null;
-        return new PagedIterable<>(listUsagesAsync(resourceGroupName, accountName, databaseRid, filter));
-    }
-
-    /**
-     * Retrieves the usages (most recent data) for the given database.
-     *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param filter An OData filter expression that describes a subset of usages to return. The supported parameter is
@@ -540,9 +511,26 @@ public final class DatabasesClientImpl implements DatabasesClient {
     }
 
     /**
+     * Retrieves the usages (most recent data) for the given database.
+     *
+     * @param resourceGroupName Name of an Azure resource group.
+     * @param accountName Cosmos DB database account name.
+     * @param databaseRid Cosmos DB database rid.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response to a list usage request.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<UsageInner> listUsages(String resourceGroupName, String accountName, String databaseRid) {
+        final String filter = null;
+        return new PagedIterable<>(listUsagesAsync(resourceGroupName, accountName, databaseRid, filter));
+    }
+
+    /**
      * Retrieves metric definitions for the given database.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -575,8 +563,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
         if (databaseRid == null) {
             return Mono.error(new IllegalArgumentException("Parameter databaseRid is required and cannot be null."));
         }
-        final String apiVersion = "2020-09-01";
-        final String accept = "application/json";
+        final String apiVersion = "2019-08-01";
         return FluxUtil
             .withContext(
                 context ->
@@ -588,7 +575,6 @@ public final class DatabasesClientImpl implements DatabasesClient {
                             accountName,
                             databaseRid,
                             apiVersion,
-                            accept,
                             context))
             .<PagedResponse<MetricDefinitionInner>>map(
                 res ->
@@ -600,7 +586,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
     /**
      * Retrieves metric definitions for the given database.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param context The context to associate with this operation.
@@ -634,8 +620,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
         if (databaseRid == null) {
             return Mono.error(new IllegalArgumentException("Parameter databaseRid is required and cannot be null."));
         }
-        final String apiVersion = "2020-09-01";
-        final String accept = "application/json";
+        final String apiVersion = "2019-08-01";
         context = this.client.mergeContext(context);
         return service
             .listMetricDefinitions(
@@ -645,7 +630,6 @@ public final class DatabasesClientImpl implements DatabasesClient {
                 accountName,
                 databaseRid,
                 apiVersion,
-                accept,
                 context)
             .map(
                 res ->
@@ -656,7 +640,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
     /**
      * Retrieves metric definitions for the given database.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -673,7 +657,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
     /**
      * Retrieves metric definitions for the given database.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param context The context to associate with this operation.
@@ -692,7 +676,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
     /**
      * Retrieves metric definitions for the given database.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -709,7 +693,7 @@ public final class DatabasesClientImpl implements DatabasesClient {
     /**
      * Retrieves metric definitions for the given database.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param context The context to associate with this operation.

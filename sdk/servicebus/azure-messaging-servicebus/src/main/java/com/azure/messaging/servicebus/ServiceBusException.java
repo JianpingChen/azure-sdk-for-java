@@ -6,17 +6,11 @@ package com.azure.messaging.servicebus;
 import com.azure.core.amqp.exception.AmqpErrorCondition;
 import com.azure.core.amqp.exception.AmqpException;
 import com.azure.core.exception.AzureException;
-import com.azure.messaging.servicebus.ServiceBusClientBuilder.ServiceBusProcessorClientBuilder;
-import com.azure.messaging.servicebus.ServiceBusClientBuilder.ServiceBusSessionProcessorClientBuilder;
-
-import java.util.function.Consumer;
 
 /**
- * Exception containing additional information about the operation that caused the error.
- *
+ * Defines {@link ServiceBusException} which has additional information about the operation that caused the
+ * error.
  * @see ServiceBusErrorSource
- * @see ServiceBusProcessorClientBuilder#processError(Consumer)
- * @see ServiceBusSessionProcessorClientBuilder#processError(Consumer)
  */
 public final class ServiceBusException extends AzureException {
     private final transient ServiceBusErrorSource errorSource;
@@ -24,10 +18,8 @@ public final class ServiceBusException extends AzureException {
     private final boolean isTransient;
 
     /**
-     * Creates an instance containing the error and the operation that created the error.
-     *
-     * @param throwable The exception that occurred.
-     * @param errorSource The Service Bus operation which caused the error.
+     * @param throwable for the error happened.
+     * @param errorSource indicating which api caused the error.
      */
     public ServiceBusException(Throwable throwable, ServiceBusErrorSource errorSource) {
         super(throwable.getMessage(), throwable);
@@ -44,6 +36,14 @@ public final class ServiceBusException extends AzureException {
     }
 
     /**
+     * Gets the {@link ServiceBusErrorSource} in case of any errors.
+     * @return the {@link ServiceBusErrorSource}
+     */
+    ServiceBusErrorSource getErrorSource() {
+        return errorSource;
+    }
+
+    /**
      * Gets the {@link ServiceBusFailureReason} in case of any errors.
      * @return the {@link ServiceBusFailureReason}
      */
@@ -52,22 +52,13 @@ public final class ServiceBusException extends AzureException {
     }
 
     /**
-     * Gets whether or not the exception is a transient error or not.
+     * A boolean indicating if the exception is a transient error or not.
      *
-     * @return {@code true} when user can retry the operation that generated the exception without additional
-     *      intervention; false otherwise.
+     * @return returns true when user can retry the operation that generated the exception without additional
+     * intervention.
      */
     public boolean isTransient() {
         return isTransient;
-    }
-
-    /**
-     * Gets the {@link ServiceBusErrorSource} in case of any errors.
-     *
-     * @return The source of the error.
-     */
-    ServiceBusErrorSource getErrorSource() {
-        return errorSource;
     }
 
     private ServiceBusFailureReason getServiceBusFailureReasonFromException(AmqpException throwable) {

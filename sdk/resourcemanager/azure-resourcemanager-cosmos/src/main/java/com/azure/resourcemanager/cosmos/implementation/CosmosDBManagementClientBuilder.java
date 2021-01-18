@@ -19,12 +19,12 @@ import java.time.Duration;
 @ServiceClientBuilder(serviceClients = {CosmosDBManagementClientImpl.class})
 public final class CosmosDBManagementClientBuilder {
     /*
-     * The ID of the target subscription.
+     * Azure subscription ID.
      */
     private String subscriptionId;
 
     /**
-     * Sets The ID of the target subscription.
+     * Sets Azure subscription ID.
      *
      * @param subscriptionId the subscriptionId value.
      * @return the CosmosDBManagementClientBuilder.

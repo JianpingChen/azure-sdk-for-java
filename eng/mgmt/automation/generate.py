@@ -64,9 +64,8 @@ def generate(
     update_version(sdk_root, service)
 
     if compile:
-        if os.system(
-                'mvn clean verify package -q -f {0}/pom.xml -pl {1}:{2} -am'.
-                format(sdk_root, GROUP_ID, module)) != 0:
+        if os.system('mvn clean verify package -f {0}/pom.xml -pl {1}:{2} -am'.
+                     format(sdk_root, GROUP_ID, module)) != 0:
             logging.error('[GENERATE] Maven build fail')
             return False
 
@@ -326,7 +325,6 @@ def parse_args() -> argparse.Namespace:
         action = 'store_true',
         help = 'Do compile after generation or not',
     )
-    parser.add_argument('--suffix', help = 'Suffix for namespace and artifact')
     parser.add_argument(
         '--auto-commit-external-change',
         action = 'store_true',
@@ -342,26 +340,20 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def update_parameters(suffix):
-    # update changeable parameters in parameters.py
-    global SUFFIX, NAMESPACE_SUFFIX, ARTIFACT_SUFFIX, NAMESPACE_FORMAT, ARTIFACT_FORMAT, OUTPUT_FOLDER_FORMAT
-
-    SUFFIX = suffix
-
-    NAMESPACE_SUFFIX = '.{0}'.format(SUFFIX) if SUFFIX else ''
-    ARTIFACT_SUFFIX = '-{0}'.format(SUFFIX) if SUFFIX else ''
-    NAMESPACE_FORMAT = 'com.azure.resourcemanager.{{0}}{0}'.format(
-        NAMESPACE_SUFFIX)
-    ARTIFACT_FORMAT = 'azure-resourcemanager-{{0}}{0}'.format(ARTIFACT_SUFFIX)
-    OUTPUT_FOLDER_FORMAT = 'sdk/{{0}}/{0}'.format(ARTIFACT_FORMAT)
-
-
 def valid_service(service: str):
     return re.sub('[^a-z0-9_]', '', service.lower())
 
 
-def read_api_specs(api_specs_file: str) -> (str, dict):
-    # return comment and api_specs
+def get_and_update_api_specs(
+    api_specs_file: str,
+    spec: str,
+    service: str = None,
+):
+    SPECIAL_SPEC = {'resources'}
+    if spec in SPECIAL_SPEC:
+        if not service:
+            service = spec
+        return valid_service(service)
 
     with open(api_specs_file) as fin:
         lines = fin.readlines()
@@ -373,30 +365,6 @@ def read_api_specs(api_specs_file: str) -> (str, dict):
             comment = ''.join(lines[:i])
             api_specs = yaml.safe_load(''.join(lines[i:]))
             break
-    else:
-        raise Exception('api-specs.yml should has non comment line')
-
-    return comment, api_specs
-
-
-def write_api_specs(api_specs_file: str, comment: str, api_specs: dict):
-    with open(api_specs_file, 'w') as fout:
-        fout.write(comment)
-        fout.write(yaml.safe_dump(api_specs))
-
-
-def get_and_update_service_from_api_specs(
-    api_specs_file: str,
-    spec: str,
-    service: str = None,
-):
-    SPECIAL_SPEC = {'resources'}
-    if spec in SPECIAL_SPEC:
-        if not service:
-            service = spec
-        return valid_service(service)
-
-    comment, api_specs = read_api_specs(api_specs_file)
 
     api_spec = api_specs.get(spec)
     if not service:
@@ -410,19 +378,11 @@ def get_and_update_service_from_api_specs(
         api_specs[spec] = dict() if not api_spec else api_spec
         api_specs[spec]['service'] = service
 
-    write_api_specs(api_specs_file, comment, api_specs)
+    with open(api_specs_file, 'w') as fout:
+        fout.write(comment)
+        fout.write(yaml.safe_dump(api_specs, sort_keys = False))
 
     return service
-
-
-def get_suffic_from_api_specs(api_specs_file: str, spec: str):
-    comment, api_specs = read_api_specs(api_specs_file)
-
-    api_spec = api_specs.get(spec)
-    if api_spec and api_spec.get('suffix'):
-        return api_spec.get('suffix')
-
-    return SUFFIX
 
 
 def sdk_automation(input_file: str, output_file: str):
@@ -445,12 +405,7 @@ def sdk_automation(input_file: str, output_file: str):
             )
         else:
             spec = match.group(1)
-            service = get_and_update_service_from_api_specs(
-                api_specs_file, spec)
-
-            pre_suffix = SUFFIX
-            suffix = get_suffic_from_api_specs(api_specs_file, spec)
-            update_parameters(suffix)
+            service = get_and_update_api_specs(api_specs_file, spec)
 
             # TODO: use specific function to detect tag in "resources"
             tag = None
@@ -494,8 +449,6 @@ def sdk_automation(input_file: str, output_file: str):
                     'succeeded',
             })
 
-            update_parameters(pre_suffix)
-
     with open(output_file, 'w') as fout:
         output = {
             'packages': packages,
@@ -505,7 +458,6 @@ def sdk_automation(input_file: str, output_file: str):
 
 def main():
     args = vars(parse_args())
-    update_parameters(args.get('suffix'))
 
     if args.get('config'):
         return sdk_automation(args['config'][0], args['config'][1])
@@ -529,8 +481,7 @@ def main():
     args['readme'] = readme
     args['spec'] = spec
 
-    service = get_and_update_service_from_api_specs(api_specs_file, spec,
-                                                    args['service'])
+    service = get_and_update_api_specs(api_specs_file, spec, args['service'])
     args['service'] = service
     set_or_increase_version_and_generate(sdk_root, **args)
 

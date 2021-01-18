@@ -1,13 +1,6 @@
 # Release History
 
-## 1.8.0-beta.1 (Unreleased)
-
-
-## 1.7.0 (2020-11-24)
-
-### New Features
-
-- Added functionality to eagerly read HTTP response bodies into memory when they will be deserialized into a POJO.
+## 1.7.0-beta.1 (Unreleased)
 
 ### Bug Fixes
 

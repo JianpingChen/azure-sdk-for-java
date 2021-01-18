@@ -39,7 +39,7 @@ public final class SqlDatabaseGetPropertiesResource extends SqlDatabaseResource 
      * the resource.
      */
     @JsonProperty(value = "_ts", access = JsonProperty.Access.WRITE_ONLY)
-    private Float ts;
+    private Object ts;
 
     /*
      * A system generated property representing the resource etag required for
@@ -104,7 +104,7 @@ public final class SqlDatabaseGetPropertiesResource extends SqlDatabaseResource 
      *
      * @return the ts value.
      */
-    public Float ts() {
+    public Object ts() {
         return this.ts;
     }
 
@@ -116,13 +116,6 @@ public final class SqlDatabaseGetPropertiesResource extends SqlDatabaseResource 
      */
     public String etag() {
         return this.etag;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public SqlDatabaseGetPropertiesResource withId(String id) {
-        super.withId(id);
-        return this;
     }
 
     /**

@@ -22,11 +22,7 @@ public final class CreateChatThreadResultConverter {
         }
 
         CreateChatThreadResult createChatThreadResult = new CreateChatThreadResult()
-<<<<<<< HEAD
             .setThread(ChatThreadConverter.convert(obj.getThread()))
-=======
-            .setChatThread(ChatThreadConverter.convert(obj.getChatThread()))
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
             .setErrors(obj.getErrors());
 
         return createChatThreadResult;

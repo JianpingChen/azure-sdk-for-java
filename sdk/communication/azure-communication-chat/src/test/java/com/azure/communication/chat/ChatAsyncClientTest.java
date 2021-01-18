@@ -78,13 +78,8 @@ public class ChatAsyncClientTest extends ChatClientTestBase {
         StepVerifier.create(client.createChatThread(threadRequest))
             .assertNext(result -> {
                 assertNotNull(result);
-<<<<<<< HEAD
                 assertNotNull(result.getThread());
                 assertNotNull(result.getThread().getId());
-=======
-                assertNotNull(result.getChatThread());
-                assertNotNull(result.getChatThread().getId());
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
             })
             .verifyComplete();
     }
@@ -102,13 +97,8 @@ public class ChatAsyncClientTest extends ChatClientTestBase {
             .assertNext(chatThreadClientResponse -> {
                 CreateChatThreadResult result = chatThreadClientResponse.getValue();
                 assertNotNull(result);
-<<<<<<< HEAD
                 assertNotNull(result.getThread());
                 assertNotNull(result.getThread().getId());
-=======
-                assertNotNull(result.getChatThread());
-                assertNotNull(result.getChatThread().getId());
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
             })
             .verifyComplete();
     }
@@ -128,56 +118,21 @@ public class ChatAsyncClientTest extends ChatClientTestBase {
 
         Response<CreateChatThreadResult> response1 = client.createChatThreadWithResponse(threadRequest).block();
         assertNotNull(response1.getValue());
-<<<<<<< HEAD
         assertNotNull(response1.getValue().getThread());
         assertNotNull(response1.getValue().getThread().getId());
 
         String expectedThreadId = response1.getValue().getThread().getId();
-=======
-        assertNotNull(response1.getValue().getChatThread());
-        assertNotNull(response1.getValue().getChatThread().getId());
-
-        String expectedThreadId = response1.getValue().getChatThread().getId();
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
 
         // Act & Assert
         StepVerifier.create(client.createChatThreadWithResponse(threadRequest))
             .assertNext(response2 -> {
                 CreateChatThreadResult result = response2.getValue();
                 assertNotNull(result);
-<<<<<<< HEAD
                 assertNotNull(result.getThread());
                 assertNotNull(result.getThread().getId());
                 assertEquals(expectedThreadId, result.getThread().getId());
-=======
-                assertNotNull(result.getChatThread());
-                assertNotNull(result.getChatThread().getId());
-                assertEquals(expectedThreadId, result.getChatThread().getId());
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
             })
             .verifyComplete();
-    }
-
-    @ParameterizedTest
-    @MethodSource("com.azure.core.test.TestBase#getHttpClients")
-    public void cannotCreateThreadWithNullOptions(HttpClient httpClient) {
-        // Arrange
-        setupTest(httpClient);
-
-        // Act & Assert
-        StepVerifier.create(client.createChatThread(null))
-            .verifyError(NullPointerException.class);
-    }
-
-    @ParameterizedTest
-    @MethodSource("com.azure.core.test.TestBase#getHttpClients")
-    public void cannotCreateThreadWithResponseWithNullOptions(HttpClient httpClient) {
-        // Arrange
-        setupTest(httpClient);
-        
-        // Act & Assert
-        StepVerifier.create(client.createChatThread(null))
-            .verifyError(NullPointerException.class);
     }
 
     @ParameterizedTest
@@ -208,11 +163,7 @@ public class ChatAsyncClientTest extends ChatClientTestBase {
         StepVerifier.create(
             client.createChatThread(threadRequest)
                 .flatMap(createChatThreadResult -> {
-<<<<<<< HEAD
                     ChatThreadAsyncClient chatThreadClient = client.getChatThreadClient(createChatThreadResult.getThread().getId());
-=======
-                    ChatThreadAsyncClient chatThreadClient = client.getChatThreadClient(createChatThreadResult.getChatThread().getId());
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
                     chatThreadClientRef.set(chatThreadClient);
                     return client.getChatThread(chatThreadClient.getChatThreadId());
                 }))
@@ -235,11 +186,7 @@ public class ChatAsyncClientTest extends ChatClientTestBase {
         StepVerifier.create(
             client.createChatThread(threadRequest)
             .flatMap(createChatThreadResult -> {
-<<<<<<< HEAD
                 ChatThreadAsyncClient chatThreadClient = client.getChatThreadClient(createChatThreadResult.getThread().getId());
-=======
-                ChatThreadAsyncClient chatThreadClient = client.getChatThreadClient(createChatThreadResult.getChatThread().getId());
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
                 chatThreadClientRef.set(chatThreadClient);
                 return client.getChatThreadWithResponse(chatThreadClient.getChatThreadId());
             }))
@@ -276,24 +223,6 @@ public class ChatAsyncClientTest extends ChatClientTestBase {
 
     @ParameterizedTest
     @MethodSource("com.azure.core.test.TestBase#getHttpClients")
-    public void cannotGetChatThreadWithNullId(HttpClient httpClient) {
-        // Act & Assert
-        setupTest(httpClient);
-        StepVerifier.create(client.getChatThread(null))
-            .verifyError(NullPointerException.class);
-    }
-
-    @ParameterizedTest
-    @MethodSource("com.azure.core.test.TestBase#getHttpClients")
-    public void cannotGetChatThreadWithResponseWithNullId(HttpClient httpClient) {
-        // Act & Assert
-        setupTest(httpClient);
-        StepVerifier.create(client.getChatThreadWithResponse(null))
-            .verifyError(NullPointerException.class);
-    }
-
-    @ParameterizedTest
-    @MethodSource("com.azure.core.test.TestBase#getHttpClients")
     public void canDeleteChatThread(HttpClient httpClient) {
         // Arrange
         setupTest(httpClient);
@@ -305,11 +234,7 @@ public class ChatAsyncClientTest extends ChatClientTestBase {
         StepVerifier.create(
             client.createChatThread(threadRequest)
                 .flatMap(createChatThreadResult -> {
-<<<<<<< HEAD
                     ChatThreadAsyncClient chatThreadClient = client.getChatThreadClient(createChatThreadResult.getThread().getId());
-=======
-                    ChatThreadAsyncClient chatThreadClient = client.getChatThreadClient(createChatThreadResult.getChatThread().getId());
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
                     chatThreadClientRef.set(chatThreadClient);
                     return client.deleteChatThread(chatThreadClient.getChatThreadId());
                 })
@@ -330,11 +255,7 @@ public class ChatAsyncClientTest extends ChatClientTestBase {
         StepVerifier.create(
             client.createChatThread(threadRequest)
                 .flatMap(createChatThreadResult -> {
-<<<<<<< HEAD
                     ChatThreadAsyncClient chatThreadClient = client.getChatThreadClient(createChatThreadResult.getThread().getId());
-=======
-                    ChatThreadAsyncClient chatThreadClient = client.getChatThreadClient(createChatThreadResult.getChatThread().getId());
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
                     chatThreadClientRef.set(chatThreadClient);
                     return client.deleteChatThreadWithResponse(chatThreadClient.getChatThreadId());
                 })
@@ -343,24 +264,6 @@ public class ChatAsyncClientTest extends ChatClientTestBase {
                 assertEquals(deleteResponse.getStatusCode(), 204);
             })
             .verifyComplete();
-    }
-
-    @ParameterizedTest
-    @MethodSource("com.azure.core.test.TestBase#getHttpClients")
-    public void cannotDeleteChatThreadWithNullId(HttpClient httpClient) {
-        // Act & Assert
-        setupTest(httpClient);
-        StepVerifier.create(client.deleteChatThread(null))
-            .verifyError(NullPointerException.class);
-    }
-
-    @ParameterizedTest
-    @MethodSource("com.azure.core.test.TestBase#getHttpClients")
-    public void cannotDeleteChatThreadWithResponseWithNullId(HttpClient httpClient) {
-        // Act & Assert
-        setupTest(httpClient);
-        StepVerifier.create(client.deleteChatThreadWithResponse(null))
-            .verifyError(NullPointerException.class);
     }
 
     @ParameterizedTest

@@ -2,10 +2,6 @@
 // Licensed under the MIT License.
 package com.azure.communication.chat;
 
-<<<<<<< HEAD
-=======
-import com.azure.communication.chat.models.AddChatParticipantsResult;
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
 import com.azure.communication.chat.models.AddChatParticipantsOptions;
 import com.azure.communication.chat.models.ChatMessage;
 import com.azure.communication.chat.models.ChatParticipant;
@@ -59,7 +55,6 @@ public final class ChatThreadClient {
 
     /**
      * Updates a thread's topic.
-<<<<<<< HEAD
      *
      * @param topic The new topic.
      */
@@ -97,26 +92,10 @@ public final class ChatThreadClient {
      * Adds participants to a thread. If participants already exist, no change occurs.
      *
      * @param options Options for adding participants.
-=======
-     *
-     * @param topic The new topic.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void updateTopic(String topic) {
-
-        this.client.updateTopic(topic).block();
-    }
-
-    /**
-     * Updates a thread's topic.
-     *
-     * @param topic The new topic.
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @param context The context to associate with this operation.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-<<<<<<< HEAD
     public Response<Void> addParticipantsWithResponse(AddChatParticipantsOptions options, Context context) {
 
         return this.client.addParticipants(options, context).block();
@@ -138,33 +117,10 @@ public final class ChatThreadClient {
      * Adds a participant to a thread. If the participant already exists, no change occurs.
      *
      * @param participant The new participant.
-=======
-    public Response<Void> updateTopicWithResponse(String topic, Context context) {
-
-        return this.client.updateTopic(topic, context).block();
-    }
-
-    /**
-     * Adds participants to a thread. If participants already exist, no change occurs.
-     *
-     * @param options Options for adding participants.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void addParticipants(AddChatParticipantsOptions options) {
-
-        this.client.addParticipants(options).block();
-    }
-
-    /**
-     * Adds participants to a thread. If participants already exist, no change occurs.
-     *
-     * @param options Options for adding participants.
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @param context The context to associate with this operation.
      * @return the completion.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-<<<<<<< HEAD
     public Response<Void> addParticipantWithResponse(ChatParticipant participant, Context context) {
 
         return this.client.addParticipants(new AddChatParticipantsOptions()
@@ -175,63 +131,6 @@ public final class ChatThreadClient {
      * Remove a participant from a thread.
      *
      * @param user User identity of the participant to remove from the thread.
-=======
-    public Response<AddChatParticipantsResult> addParticipantsWithResponse(
-        AddChatParticipantsOptions options, Context context) {
-        return this.client.addParticipants(options, context).block();
-    }
-
-    /**
-     * Adds a participant to a thread. If the participant already exists, no change occurs.
-     *
-     * @param participant The new participant.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void addParticipant(ChatParticipant participant) {
-
-        this.client.addParticipants(new AddChatParticipantsOptions()
-            .setParticipants(Collections.singletonList(participant))).block();
-    }
-
-    /**
-     * Adds a participant to a thread. If the participant already exists, no change occurs.
-     *
-     * @param participant The new participant.
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
-     * @param context The context to associate with this operation.
-     * @return the completion.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-<<<<<<< HEAD
-    public Response<Void> removeParticipantWithResponse(CommunicationUser user, Context context) {
-
-        return this.client.removeParticipant(user, context).block();
-=======
-    public Response<AddChatParticipantsResult> addParticipantWithResponse(ChatParticipant participant,
-                                                                          Context context) {
-
-        return this.client.addParticipants(new AddChatParticipantsOptions()
-            .setParticipants(Collections.singletonList(participant)), context).block();
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
-    }
-
-    /**
-     * Remove a participant from a thread.
-     *
-<<<<<<< HEAD
-     * @param user User identity of the thread participant to remove from the thread.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void removeParticipant(CommunicationUser user) {
-
-        this.client.removeParticipant(user).block();
-    }
-
-    /**
-     * Gets the participants of a thread.
-     *
-=======
-     * @param user User identity of the participant to remove from the thread.
      * @param context The context to associate with this operation.
      * @return the completion.
      */
@@ -255,12 +154,10 @@ public final class ChatThreadClient {
     /**
      * Gets the participants of a thread.
      *
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      * @return the participants of a thread.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<ChatParticipant> listParticipants() {
-<<<<<<< HEAD
 
         return new PagedIterable<>(this.client.listParticipants());
     }
@@ -274,45 +171,20 @@ public final class ChatThreadClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<ChatParticipant> listParticipants(ListParticipantsOptions listParticipantsOptions) {
         return new PagedIterable<>(this.client.listParticipants(listParticipantsOptions));
-=======
-
-        return new PagedIterable<>(this.client.listParticipants());
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
     }
 
     /**
      * Gets the participants of a thread.
-<<<<<<< HEAD
-=======
-     *
-     * @param listParticipantsOptions The request options.
-     * @return the participants of a thread.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<ChatParticipant> listParticipants(ListParticipantsOptions listParticipantsOptions) {
-        return new PagedIterable<>(this.client.listParticipants(listParticipantsOptions));
-    }
-
-    /**
-     * Gets the participants of a thread.
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
      *
      * @param context The context to associate with this operation.
      * @return the participants of a thread.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<ChatParticipant> listParticipants(Context context) {
-<<<<<<< HEAD
 
         return new PagedIterable<>(this.client.listParticipants(context));
     }
 
-=======
-
-        return new PagedIterable<>(this.client.listParticipants(context));
-    }
-
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441
     /**
      * Gets the participants of a thread.
      *

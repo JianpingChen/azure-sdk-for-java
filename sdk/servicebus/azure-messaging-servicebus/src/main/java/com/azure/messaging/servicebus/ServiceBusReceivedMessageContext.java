@@ -34,15 +34,14 @@ public final class ServiceBusReceivedMessageContext {
     }
 
     /**
-     * Abandons the {@link #getMessage() message} in this context.
+     * Abandon the {@link ServiceBusReceivedMessage} in this context.
      */
     public void abandon() {
         receiverClient.abandon(receivedMessageContext.getMessage()).block();
     }
 
     /**
-     * Abandons the {@link #getMessage() message} in this context.
-     *
+     * Abandon the {@link ServiceBusReceivedMessage} in this context.
      * @param options Additional options for abandoning the message.
      */
     public void abandon(AbandonOptions options) {
@@ -50,52 +49,45 @@ public final class ServiceBusReceivedMessageContext {
     }
 
     /**
-     * Completes the {@link #getMessage() message} in this context.
+     * Completes the {@link ServiceBusReceivedMessage} in this context.
      */
     public void complete() {
         receiverClient.complete(receivedMessageContext.getMessage()).block();
     }
 
     /**
-     * Completes the {@link #getMessage() message} in this context.
-     *
+     * Completes the {@link ServiceBusReceivedMessage} in this context.
      * @param options Additional options for completing the message.
-     * @throws NullPointerException if {@code options} are null.
      */
     public void complete(CompleteOptions options) {
         receiverClient.complete(receivedMessageContext.getMessage(), options).block();
     }
 
     /**
-     * Defers the {@link #getMessage() message} in this context.
+     * Defers the {@link ServiceBusReceivedMessage} in this context.
      */
     public void defer() {
         receiverClient.defer(receivedMessageContext.getMessage()).block();
     }
 
     /**
-     * Defers the {@link #getMessage() message} in this context.
-     *
-     * @param options Additional options for deferring the message.
-     * @throws NullPointerException if {@code options} are null.
+     * Defers the {@link ServiceBusReceivedMessage} in this context.
+     * @param options Additional options for defering the message.
      */
     public void defer(DeferOptions options) {
         receiverClient.defer(receivedMessageContext.getMessage(), options).block();
     }
 
     /**
-     * Dead-letters the {@link #getMessage() message} in this context.
+     * Deadletters the {@link ServiceBusReceivedMessage} in this context.
      */
     public void deadLetter() {
         receiverClient.deadLetter(receivedMessageContext.getMessage()).block();
     }
 
     /**
-     * Dead-letters the {@link #getMessage() message} in this context.
-     *
-     * @param options Additional options for dead-lettering the message.
-     *
-     * @throws NullPointerException if {@code options} are null.
+     * Deadletters the {@link ServiceBusReceivedMessage} in this context.
+     * @param options Additional options for deadlettering the message.
      */
     public void deadLetter(DeadLetterOptions options) {
         receiverClient.deadLetter(receivedMessageContext.getMessage(), options).block();

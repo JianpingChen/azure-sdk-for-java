@@ -9,8 +9,6 @@ import java.time.Duration;
 
 /**
  * Options set when creating a service bus receiver.
- *
- * @see ServiceBusReceiverAsyncClient
  */
 class ReceiverOptions {
     private final ServiceBusReceiveMode receiveMode;

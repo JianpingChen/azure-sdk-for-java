@@ -258,7 +258,7 @@ class ServiceBusReceiverAsyncClientTest {
         when(managementNode.peek(fromSequenceNumber, null, null)).thenReturn(Mono.just(receivedMessage));
 
         // Act & Assert
-        StepVerifier.create(receiver.peekMessage(fromSequenceNumber))
+        StepVerifier.create(receiver.peekMessageAt(fromSequenceNumber))
             .expectNext(receivedMessage)
             .verifyComplete();
     }
@@ -428,7 +428,7 @@ class ServiceBusReceiverAsyncClientTest {
             .thenReturn(Flux.fromArray(new ServiceBusReceivedMessage[]{receivedMessage, receivedMessage2}));
 
         // Act & Assert
-        StepVerifier.create(receiver.peekMessages(numberOfEvents, fromSequenceNumber))
+        StepVerifier.create(receiver.peekMessagesAt(numberOfEvents, fromSequenceNumber))
             .expectNext(receivedMessage, receivedMessage2)
             .verifyComplete();
     }
@@ -785,36 +785,6 @@ class ServiceBusReceiverAsyncClientTest {
 
         // Assert
         verify(onClientClose).run();
-    }
-
-    /**
-     * Verifies that managementNodeLocks was closed.
-     */
-    @Test
-    void callsManagementNodeLocksCloseWhenClientIsClosed() {
-        // Given
-        Assertions.assertFalse(receiver.isManagementNodeLocksClosed());
-
-        // Act
-        receiver.close();
-
-        // Assert
-        Assertions.assertTrue(receiver.isManagementNodeLocksClosed());
-    }
-
-    /**
-     * Verifies that renewalContainer was closed.
-     */
-    @Test
-    void callsRenewalContainerCloseWhenClientIsClosed() {
-        // Given
-        Assertions.assertFalse(receiver.isRenewalContainerClosed());
-
-        // Act
-        receiver.close();
-
-        // Assert
-        Assertions.assertTrue(receiver.isRenewalContainerClosed());
     }
 
     /**

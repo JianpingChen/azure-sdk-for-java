@@ -11,21 +11,16 @@ import com.azure.messaging.servicebus.ServiceBusTransactionContext;
 abstract class SettlementOptions {
     private ServiceBusTransactionContext transactionContext;
 
-    /**
-     * Gets the transaction associated with the settlement operation.
-     *
-     * @return The transaction context associated with the settlement operation. {@code null} if there is none.
-     */
     public ServiceBusTransactionContext getTransactionContext() {
         return transactionContext;
     }
 
     /**
-     * Sets the {@link ServiceBusTransactionContext} for the settlement operation.
+     * Sets the {@link ServiceBusTransactionContext} to the options.
      *
      * @param transactionContext The {@link ServiceBusTransactionContext} that will be used to settle a message.
      *
-     * @return The updated {@link SettlementOptions} object.
+     * @return The Updated {@link SettlementOptions} object.
      */
     public SettlementOptions setTransactionContext(ServiceBusTransactionContext transactionContext) {
         this.transactionContext = transactionContext;

@@ -27,10 +27,10 @@ public class NetezzaSource extends TabularSource {
 
     /**
      * The partition mechanism that will be used for Netezza read in parallel.
-     * Possible values include: "None", "DataSlice", "DynamicRange".
+     * Possible values include: 'None', 'DataSlice', 'DynamicRange'.
      */
     @JsonProperty(value = "partitionOption")
-    private Object partitionOption;
+    private NetezzaPartitionOption partitionOption;
 
     /**
      * The settings that will be leveraged for Netezza source partitioning.
@@ -59,21 +59,21 @@ public class NetezzaSource extends TabularSource {
     }
 
     /**
-     * Get the partition mechanism that will be used for Netezza read in parallel. Possible values include: "None", "DataSlice", "DynamicRange".
+     * Get the partition mechanism that will be used for Netezza read in parallel. Possible values include: 'None', 'DataSlice', 'DynamicRange'.
      *
      * @return the partitionOption value
      */
-    public Object partitionOption() {
+    public NetezzaPartitionOption partitionOption() {
         return this.partitionOption;
     }
 
     /**
-     * Set the partition mechanism that will be used for Netezza read in parallel. Possible values include: "None", "DataSlice", "DynamicRange".
+     * Set the partition mechanism that will be used for Netezza read in parallel. Possible values include: 'None', 'DataSlice', 'DynamicRange'.
      *
      * @param partitionOption the partitionOption value to set
      * @return the NetezzaSource object itself.
      */
-    public NetezzaSource withPartitionOption(Object partitionOption) {
+    public NetezzaSource withPartitionOption(NetezzaPartitionOption partitionOption) {
         this.partitionOption = partitionOption;
         return this;
     }

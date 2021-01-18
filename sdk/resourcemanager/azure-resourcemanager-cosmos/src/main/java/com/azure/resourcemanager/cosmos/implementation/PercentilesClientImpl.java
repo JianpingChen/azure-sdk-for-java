@@ -6,7 +6,6 @@ package com.azure.resourcemanager.cosmos.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Headers;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
@@ -59,7 +58,7 @@ public final class PercentilesClientImpl implements PercentilesClient {
     @Host("{$host}")
     @ServiceInterface(name = "CosmosDBManagementCl")
     private interface PercentilesService {
-        @Headers({"Content-Type: application/json"})
+        @Headers({"Accept: application/json", "Content-Type: application/json"})
         @Get(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB"
                 + "/databaseAccounts/{accountName}/percentile/metrics")
@@ -72,7 +71,6 @@ public final class PercentilesClientImpl implements PercentilesClient {
             @PathParam("accountName") String accountName,
             @QueryParam("api-version") String apiVersion,
             @QueryParam("$filter") String filter,
-            @HeaderParam("Accept") String accept,
             Context context);
     }
 
@@ -80,7 +78,7 @@ public final class PercentilesClientImpl implements PercentilesClient {
      * Retrieves the metrics determined by the given filter for the given database account. This url is only for PBS and
      * Replication Latency data.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be
      *     filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and
@@ -115,8 +113,7 @@ public final class PercentilesClientImpl implements PercentilesClient {
         if (filter == null) {
             return Mono.error(new IllegalArgumentException("Parameter filter is required and cannot be null."));
         }
-        final String apiVersion = "2020-09-01";
-        final String accept = "application/json";
+        final String apiVersion = "2019-08-01";
         return FluxUtil
             .withContext(
                 context ->
@@ -128,7 +125,6 @@ public final class PercentilesClientImpl implements PercentilesClient {
                             accountName,
                             apiVersion,
                             filter,
-                            accept,
                             context))
             .<PagedResponse<PercentileMetricInner>>map(
                 res ->
@@ -141,7 +137,7 @@ public final class PercentilesClientImpl implements PercentilesClient {
      * Retrieves the metrics determined by the given filter for the given database account. This url is only for PBS and
      * Replication Latency data.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be
      *     filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and
@@ -177,8 +173,7 @@ public final class PercentilesClientImpl implements PercentilesClient {
         if (filter == null) {
             return Mono.error(new IllegalArgumentException("Parameter filter is required and cannot be null."));
         }
-        final String apiVersion = "2020-09-01";
-        final String accept = "application/json";
+        final String apiVersion = "2019-08-01";
         context = this.client.mergeContext(context);
         return service
             .listMetrics(
@@ -188,7 +183,6 @@ public final class PercentilesClientImpl implements PercentilesClient {
                 accountName,
                 apiVersion,
                 filter,
-                accept,
                 context)
             .map(
                 res ->
@@ -200,7 +194,7 @@ public final class PercentilesClientImpl implements PercentilesClient {
      * Retrieves the metrics determined by the given filter for the given database account. This url is only for PBS and
      * Replication Latency data.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be
      *     filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and
@@ -220,7 +214,7 @@ public final class PercentilesClientImpl implements PercentilesClient {
      * Retrieves the metrics determined by the given filter for the given database account. This url is only for PBS and
      * Replication Latency data.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be
      *     filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and
@@ -241,7 +235,7 @@ public final class PercentilesClientImpl implements PercentilesClient {
      * Retrieves the metrics determined by the given filter for the given database account. This url is only for PBS and
      * Replication Latency data.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be
      *     filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and
@@ -261,7 +255,7 @@ public final class PercentilesClientImpl implements PercentilesClient {
      * Retrieves the metrics determined by the given filter for the given database account. This url is only for PBS and
      * Replication Latency data.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param filter An OData filter expression that describes a subset of metrics to return. The parameters that can be
      *     filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and

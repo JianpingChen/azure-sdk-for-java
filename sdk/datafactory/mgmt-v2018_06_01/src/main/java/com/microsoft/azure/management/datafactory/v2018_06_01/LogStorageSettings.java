@@ -12,7 +12,7 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * (Deprecated. Please use LogSettings) Log storage settings.
+ * Log storage settings.
  */
 public class LogStorageSettings {
     /**

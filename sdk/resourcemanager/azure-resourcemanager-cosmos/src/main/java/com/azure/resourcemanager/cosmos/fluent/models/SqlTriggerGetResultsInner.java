@@ -11,7 +11,6 @@ import com.azure.resourcemanager.cosmos.models.ArmResourceProperties;
 import com.azure.resourcemanager.cosmos.models.SqlTriggerGetPropertiesResource;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Map;
 
 /** An Azure Cosmos DB trigger. */
 @JsonFlatten
@@ -42,20 +41,6 @@ public class SqlTriggerGetResultsInner extends ArmResourceProperties {
      */
     public SqlTriggerGetResultsInner withResource(SqlTriggerGetPropertiesResource resource) {
         this.resource = resource;
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public SqlTriggerGetResultsInner withLocation(String location) {
-        super.withLocation(location);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public SqlTriggerGetResultsInner withTags(Map<String, String> tags) {
-        super.withTags(tags);
         return this;
     }
 

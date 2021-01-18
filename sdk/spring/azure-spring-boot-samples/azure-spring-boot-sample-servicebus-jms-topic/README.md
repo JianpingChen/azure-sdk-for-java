@@ -6,9 +6,13 @@ This sample project demonstrates how to use Spring JMS Topic for Azure Service B
 Running this sample will be charged by Azure. You can check the usage and bill at this [link](https://azure.microsoft.com/account/).
 
 ## Getting started
+### Prerequisites
 
-### Environment checklist
-We need to ensure that this [environment checklist][ready-to-run-checklist] is completed before the run.
+* An Azure subscription. If you don't already have an Azure subscription, you can activate your [MSDN subscriber benefits](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/) or sign up for a [free Azure account](https://azure.microsoft.com/free/).
+
+* A [Java Development Kit (JDK)][jdk_link], version 1.8.
+
+* [Apache Maven](https://maven.apache.org/), version 3.0 or later.
 
 ### Create Service Bus on Azure
 1. Go to [Azure portal](https://portal.azure.com/) and create the service by following this [link](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-create-namespace-portal). 
@@ -34,6 +38,8 @@ We need to ensure that this [environment checklist][ready-to-run-checklist] is c
 2. Specify your topic name and subscription name. Update `TOPIC_NAME` in [TopicSendController] and [TopicReceiveController], and `SUBSCRIPTION_NAME` in [TopicReceiveController].
 
 ### How to run
+First, we need to ensure that this [instruction] is completed before run.
+
 1. Run with Maven:
     ```
     # Under sdk/spring project root directory
@@ -69,6 +75,6 @@ Type | Reference Link
 
 <!-- LINKS -->
 [jdk_link]: https://docs.microsoft.com/java/azure/jdk/?view=azure-java-stable
-[ready-to-run-checklist]: https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/spring/azure-spring-boot-samples/README.md#ready-to-run-checklist
+[instruction]: https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/spring/CONTRIBUTING.md#building-from-source
 [TopicSendController]: https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/spring/azure-spring-boot-samples/azure-spring-boot-sample-servicebus-jms-topic/src/main/java/com/azure/spring/sample/jms/topic/TopicSendController.java
 [TopicReceiveController]: https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/spring/azure-spring-boot-samples/azure-spring-boot-sample-servicebus-jms-topic/src/main/java/com/azure/spring/sample/jms/topic/TopicReceiveController.java

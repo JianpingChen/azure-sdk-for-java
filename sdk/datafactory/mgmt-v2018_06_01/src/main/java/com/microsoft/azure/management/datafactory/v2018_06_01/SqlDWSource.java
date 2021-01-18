@@ -43,11 +43,11 @@ public class SqlDWSource extends TabularSource {
 
     /**
      * The partition mechanism that will be used for Sql read in parallel.
-     * Possible values include: "None", "PhysicalPartitionsOfTable",
-     * "DynamicRange".
+     * Possible values include: 'None', 'PhysicalPartitionsOfTable',
+     * 'DynamicRange'.
      */
     @JsonProperty(value = "partitionOption")
-    private Object partitionOption;
+    private SqlPartitionOption partitionOption;
 
     /**
      * The settings that will be leveraged for Sql source partitioning.
@@ -116,21 +116,21 @@ public class SqlDWSource extends TabularSource {
     }
 
     /**
-     * Get the partition mechanism that will be used for Sql read in parallel. Possible values include: "None", "PhysicalPartitionsOfTable", "DynamicRange".
+     * Get the partition mechanism that will be used for Sql read in parallel. Possible values include: 'None', 'PhysicalPartitionsOfTable', 'DynamicRange'.
      *
      * @return the partitionOption value
      */
-    public Object partitionOption() {
+    public SqlPartitionOption partitionOption() {
         return this.partitionOption;
     }
 
     /**
-     * Set the partition mechanism that will be used for Sql read in parallel. Possible values include: "None", "PhysicalPartitionsOfTable", "DynamicRange".
+     * Set the partition mechanism that will be used for Sql read in parallel. Possible values include: 'None', 'PhysicalPartitionsOfTable', 'DynamicRange'.
      *
      * @param partitionOption the partitionOption value to set
      * @return the SqlDWSource object itself.
      */
-    public SqlDWSource withPartitionOption(Object partitionOption) {
+    public SqlDWSource withPartitionOption(SqlPartitionOption partitionOption) {
         this.partitionOption = partitionOption;
         return this;
     }

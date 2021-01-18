@@ -51,7 +51,6 @@ public class ChatOptionsProvider {
         options.setPriority(ChatMessagePriority.NORMAL);
         options.setContent("Content");
         options.setSenderDisplayName("Tester");
-        options.setType(ChatMessageType.TEXT);
 
         return options;
     }

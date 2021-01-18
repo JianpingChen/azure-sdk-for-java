@@ -6,7 +6,6 @@ package com.azure.resourcemanager.cosmos.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Headers;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
@@ -60,7 +59,7 @@ public final class PartitionKeyRangeIdsClientImpl implements PartitionKeyRangeId
     @Host("{$host}")
     @ServiceInterface(name = "CosmosDBManagementCl")
     private interface PartitionKeyRangeIdsService {
-        @Headers({"Content-Type: application/json"})
+        @Headers({"Accept: application/json", "Content-Type: application/json"})
         @Get(
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB"
                 + "/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}"
@@ -77,14 +76,13 @@ public final class PartitionKeyRangeIdsClientImpl implements PartitionKeyRangeId
             @PathParam("partitionKeyRangeId") String partitionKeyRangeId,
             @QueryParam("api-version") String apiVersion,
             @QueryParam("$filter") String filter,
-            @HeaderParam("Accept") String accept,
             Context context);
     }
 
     /**
      * Retrieves the metrics determined by the given filter for the given partition key range id.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -137,8 +135,7 @@ public final class PartitionKeyRangeIdsClientImpl implements PartitionKeyRangeId
         if (filter == null) {
             return Mono.error(new IllegalArgumentException("Parameter filter is required and cannot be null."));
         }
-        final String apiVersion = "2020-09-01";
-        final String accept = "application/json";
+        final String apiVersion = "2019-08-01";
         return FluxUtil
             .withContext(
                 context ->
@@ -153,7 +150,6 @@ public final class PartitionKeyRangeIdsClientImpl implements PartitionKeyRangeId
                             partitionKeyRangeId,
                             apiVersion,
                             filter,
-                            accept,
                             context))
             .<PagedResponse<PartitionMetricInner>>map(
                 res ->
@@ -165,7 +161,7 @@ public final class PartitionKeyRangeIdsClientImpl implements PartitionKeyRangeId
     /**
      * Retrieves the metrics determined by the given filter for the given partition key range id.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -220,8 +216,7 @@ public final class PartitionKeyRangeIdsClientImpl implements PartitionKeyRangeId
         if (filter == null) {
             return Mono.error(new IllegalArgumentException("Parameter filter is required and cannot be null."));
         }
-        final String apiVersion = "2020-09-01";
-        final String accept = "application/json";
+        final String apiVersion = "2019-08-01";
         context = this.client.mergeContext(context);
         return service
             .listMetrics(
@@ -234,7 +229,6 @@ public final class PartitionKeyRangeIdsClientImpl implements PartitionKeyRangeId
                 partitionKeyRangeId,
                 apiVersion,
                 filter,
-                accept,
                 context)
             .map(
                 res ->
@@ -245,7 +239,7 @@ public final class PartitionKeyRangeIdsClientImpl implements PartitionKeyRangeId
     /**
      * Retrieves the metrics determined by the given filter for the given partition key range id.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -275,7 +269,7 @@ public final class PartitionKeyRangeIdsClientImpl implements PartitionKeyRangeId
     /**
      * Retrieves the metrics determined by the given filter for the given partition key range id.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -307,7 +301,7 @@ public final class PartitionKeyRangeIdsClientImpl implements PartitionKeyRangeId
     /**
      * Retrieves the metrics determined by the given filter for the given partition key range id.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.
@@ -335,7 +329,7 @@ public final class PartitionKeyRangeIdsClientImpl implements PartitionKeyRangeId
     /**
      * Retrieves the metrics determined by the given filter for the given partition key range id.
      *
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName Name of an Azure resource group.
      * @param accountName Cosmos DB database account name.
      * @param databaseRid Cosmos DB database rid.
      * @param collectionRid Cosmos DB collection rid.

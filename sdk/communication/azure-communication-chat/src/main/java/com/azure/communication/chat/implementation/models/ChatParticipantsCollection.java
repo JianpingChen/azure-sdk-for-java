@@ -14,11 +14,7 @@ public final class ChatParticipantsCollection {
     /*
      * Chat participants.
      */
-<<<<<<< HEAD:sdk/communication/azure-communication-chat/src/main/java/com/azure/communication/chat/implementation/models/ChatParticipantsCollection.java
     @JsonProperty(value = "value")
-=======
-    @JsonProperty(value = "value", required = true)
->>>>>>> 3607e737b627a7840215e6eca6be23ee44780441:sdk/communication/azure-communication-chat/src/main/java/com/azure/communication/chat/implementation/models/ChatThreadMembersCollection.java
     private List<ChatParticipant> value;
 
     /*

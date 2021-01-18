@@ -4,9 +4,7 @@
 
 package com.azure.communication.chat.implementation.models;
 
-import com.azure.communication.chat.models.ChatMessageContent;
 import com.azure.communication.chat.models.ChatMessagePriority;
-import com.azure.communication.chat.models.ChatMessageType;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
@@ -17,38 +15,38 @@ public final class ChatMessage {
     /*
      * The id of the chat message. This id is server generated.
      */
-    @JsonProperty(value = "id", required = true)
+    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /*
-     * The chat message type.
+     * Type of the chat message.
+     *
+     * Possible values:
+     * - Text
+     * - ThreadActivity/TopicUpdate
+     * - ThreadActivity/AddMember
+     * - ThreadActivity/DeleteMember
      */
-    @JsonProperty(value = "type", required = true)
-    private ChatMessageType type;
+    @JsonProperty(value = "type")
+    private String type;
 
     /*
      * The chat message priority.
      */
-    @JsonProperty(value = "priority", required = true)
+    @JsonProperty(value = "priority")
     private ChatMessagePriority priority;
-
-    /*
-     * Sequence of the chat message in the conversation.
-     */
-    @JsonProperty(value = "sequenceId", required = true)
-    private String sequenceId;
 
     /*
      * Version of the chat message.
      */
-    @JsonProperty(value = "version", required = true)
+    @JsonProperty(value = "version", access = JsonProperty.Access.WRITE_ONLY)
     private String version;
 
     /*
-     * Content of a chat message.
+     * Content of the chat message.
      */
     @JsonProperty(value = "content")
-    private ChatMessageContent content;
+    private String content;
 
     /*
      * The display name of the chat message sender. This property is used to
@@ -59,27 +57,27 @@ public final class ChatMessage {
 
     /*
      * The timestamp when the chat message arrived at the server. The timestamp
-     * is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.
+     * is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.
      */
-    @JsonProperty(value = "createdOn", required = true)
+    @JsonProperty(value = "createdOn", access = JsonProperty.Access.WRITE_ONLY)
     private OffsetDateTime createdOn;
 
     /*
      * The id of the chat message sender.
      */
-    @JsonProperty(value = "senderId", required = true)
+    @JsonProperty(value = "senderId", access = JsonProperty.Access.WRITE_ONLY)
     private String senderId;
 
     /*
-     * The timestamp (if applicable) when the message was deleted. The
-     * timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.
+     * The timestamp when the chat message was deleted. The timestamp is in
+     * ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.
      */
     @JsonProperty(value = "deletedOn")
     private OffsetDateTime deletedOn;
 
     /*
-     * The last timestamp (if applicable) when the message was edited. The
-     * timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.
+     * The timestamp when the chat message was edited. The timestamp is in
+     * ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.
      */
     @JsonProperty(value = "editedOn")
     private OffsetDateTime editedOn;
@@ -94,32 +92,25 @@ public final class ChatMessage {
     }
 
     /**
-     * Set the id property: The id of the chat message. This id is server generated.
+     * Get the type property: Type of the chat message.
      *
-     * @param id the id value to set.
-     * @return the ChatMessage object itself.
-     */
-    public ChatMessage setId(String id) {
-        this.id = id;
-        return this;
-    }
-
-    /**
-     * Get the type property: The chat message type.
+     * <p>Possible values: - Text - ThreadActivity/TopicUpdate - ThreadActivity/AddMember - ThreadActivity/DeleteMember.
      *
      * @return the type value.
      */
-    public ChatMessageType getType() {
+    public String getType() {
         return this.type;
     }
 
     /**
-     * Set the type property: The chat message type.
+     * Set the type property: Type of the chat message.
+     *
+     * <p>Possible values: - Text - ThreadActivity/TopicUpdate - ThreadActivity/AddMember - ThreadActivity/DeleteMember.
      *
      * @param type the type value to set.
      * @return the ChatMessage object itself.
      */
-    public ChatMessage setType(ChatMessageType type) {
+    public ChatMessage setType(String type) {
         this.type = type;
         return this;
     }
@@ -145,26 +136,6 @@ public final class ChatMessage {
     }
 
     /**
-     * Get the sequenceId property: Sequence of the chat message in the conversation.
-     *
-     * @return the sequenceId value.
-     */
-    public String getSequenceId() {
-        return this.sequenceId;
-    }
-
-    /**
-     * Set the sequenceId property: Sequence of the chat message in the conversation.
-     *
-     * @param sequenceId the sequenceId value to set.
-     * @return the ChatMessage object itself.
-     */
-    public ChatMessage setSequenceId(String sequenceId) {
-        this.sequenceId = sequenceId;
-        return this;
-    }
-
-    /**
      * Get the version property: Version of the chat message.
      *
      * @return the version value.
@@ -174,32 +145,21 @@ public final class ChatMessage {
     }
 
     /**
-     * Set the version property: Version of the chat message.
-     *
-     * @param version the version value to set.
-     * @return the ChatMessage object itself.
-     */
-    public ChatMessage setVersion(String version) {
-        this.version = version;
-        return this;
-    }
-
-    /**
-     * Get the content property: Content of a chat message.
+     * Get the content property: Content of the chat message.
      *
      * @return the content value.
      */
-    public ChatMessageContent getContent() {
+    public String getContent() {
         return this.content;
     }
 
     /**
-     * Set the content property: Content of a chat message.
+     * Set the content property: Content of the chat message.
      *
      * @param content the content value to set.
      * @return the ChatMessage object itself.
      */
-    public ChatMessage setContent(ChatMessageContent content) {
+    public ChatMessage setContent(String content) {
         this.content = content;
         return this;
     }
@@ -228,24 +188,12 @@ public final class ChatMessage {
 
     /**
      * Get the createdOn property: The timestamp when the chat message arrived at the server. The timestamp is in
-     * RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.
+     * ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.
      *
      * @return the createdOn value.
      */
     public OffsetDateTime getCreatedOn() {
         return this.createdOn;
-    }
-
-    /**
-     * Set the createdOn property: The timestamp when the chat message arrived at the server. The timestamp is in
-     * RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.
-     *
-     * @param createdOn the createdOn value to set.
-     * @return the ChatMessage object itself.
-     */
-    public ChatMessage setCreatedOn(OffsetDateTime createdOn) {
-        this.createdOn = createdOn;
-        return this;
     }
 
     /**
@@ -258,19 +206,8 @@ public final class ChatMessage {
     }
 
     /**
-     * Set the senderId property: The id of the chat message sender.
-     *
-     * @param senderId the senderId value to set.
-     * @return the ChatMessage object itself.
-     */
-    public ChatMessage setSenderId(String senderId) {
-        this.senderId = senderId;
-        return this;
-    }
-
-    /**
-     * Get the deletedOn property: The timestamp (if applicable) when the message was deleted. The timestamp is in
-     * RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.
+     * Get the deletedOn property: The timestamp when the chat message was deleted. The timestamp is in ISO8601 format:
+     * `yyyy-MM-ddTHH:mm:ssZ`.
      *
      * @return the deletedOn value.
      */
@@ -279,8 +216,8 @@ public final class ChatMessage {
     }
 
     /**
-     * Set the deletedOn property: The timestamp (if applicable) when the message was deleted. The timestamp is in
-     * RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.
+     * Set the deletedOn property: The timestamp when the chat message was deleted. The timestamp is in ISO8601 format:
+     * `yyyy-MM-ddTHH:mm:ssZ`.
      *
      * @param deletedOn the deletedOn value to set.
      * @return the ChatMessage object itself.
@@ -291,8 +228,8 @@ public final class ChatMessage {
     }
 
     /**
-     * Get the editedOn property: The last timestamp (if applicable) when the message was edited. The timestamp is in
-     * RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.
+     * Get the editedOn property: The timestamp when the chat message was edited. The timestamp is in ISO8601 format:
+     * `yyyy-MM-ddTHH:mm:ssZ`.
      *
      * @return the editedOn value.
      */
@@ -301,8 +238,8 @@ public final class ChatMessage {
     }
 
     /**
-     * Set the editedOn property: The last timestamp (if applicable) when the message was edited. The timestamp is in
-     * RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.
+     * Set the editedOn property: The timestamp when the chat message was edited. The timestamp is in ISO8601 format:
+     * `yyyy-MM-ddTHH:mm:ssZ`.
      *
      * @param editedOn the editedOn value to set.
      * @return the ChatMessage object itself.

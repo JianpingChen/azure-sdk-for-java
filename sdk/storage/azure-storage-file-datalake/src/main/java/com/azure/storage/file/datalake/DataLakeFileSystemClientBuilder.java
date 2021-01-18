@@ -10,7 +10,6 @@ import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpPipelinePolicy;
-import com.azure.core.util.ClientOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.logging.ClientLogger;
@@ -66,7 +65,6 @@ public class DataLakeFileSystemClientBuilder {
     private RequestRetryOptions retryOptions = new RequestRetryOptions();
     private HttpPipeline httpPipeline;
 
-    private ClientOptions clientOptions = new ClientOptions();
     private Configuration configuration;
     private DataLakeServiceVersion version;
 
@@ -112,7 +110,7 @@ public class DataLakeFileSystemClientBuilder {
 
         HttpPipeline pipeline = (httpPipeline != null) ? httpPipeline : BuilderHelper.buildPipeline(
             storageSharedKeyCredential, tokenCredential, sasTokenCredential, endpoint, retryOptions, logOptions,
-            clientOptions, httpClient, perCallPolicies, perRetryPolicies, configuration, logger);
+            httpClient, perCallPolicies, perRetryPolicies, configuration, logger);
 
         return new DataLakeFileSystemAsyncClient(pipeline, String.format("%s/%s", endpoint, dataLakeFileSystemName),
             serviceVersion, accountName, dataLakeFileSystemName, blobContainerClientBuilder.buildAsyncClient());
@@ -320,19 +318,6 @@ public class DataLakeFileSystemClientBuilder {
         }
 
         this.httpPipeline = httpPipeline;
-        return this;
-    }
-
-    /**
-     * Sets the client options for all the requests made through the client.
-     *
-     * @param clientOptions {@link ClientOptions}.
-     * @return the updated DataLakeFileSystemClientBuilder object
-     * @throws NullPointerException If {@code clientOptions} is {@code null}.
-     */
-    public DataLakeFileSystemClientBuilder clientOptions(ClientOptions clientOptions) {
-        blobContainerClientBuilder.clientOptions(clientOptions);
-        this.clientOptions = Objects.requireNonNull(clientOptions, "'clientOptions' cannot be null.");
         return this;
     }
 

@@ -10,7 +10,7 @@ import java.time.Duration;
 /** The interface for CosmosDBManagementClient class. */
 public interface CosmosDBManagementClient {
     /**
-     * Gets The ID of the target subscription.
+     * Gets Azure subscription ID.
      *
      * @return the subscriptionId value.
      */
